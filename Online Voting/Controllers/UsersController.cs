@@ -10,17 +10,19 @@ namespace Online_Voting.Controllers
     //[Authorize]
     public class UsersController : Controller
     {
-        private readonly IUser _repo;
+        private readonly IUser _UserRepo;
+        private readonly ICandidate _CandidateRepo;
 
-        public UsersController(IUser repo)
+        public UsersController(IUser repo, ICandidate candidateRepo)
         {
-            _repo = repo;
+            _UserRepo = repo;
+            _CandidateRepo = candidateRepo;
         }
 
         // GET: Users
         public IActionResult Index()
         {
-            return View(_repo.GetAll());
+            return View(_UserRepo.GetAll());
         }
 
         // GET: Users/Details/5
@@ -31,7 +33,7 @@ namespace Online_Voting.Controllers
                 return NotFound();
             }
 
-            var user = _repo.GetByID(id);
+            var user = _UserRepo.GetByID(id);
             if (user == null)
             {
                 return NotFound();
@@ -55,9 +57,10 @@ namespace Online_Voting.Controllers
         {
             if (ModelState.IsValid)
             {
-                _repo.Add(user);
-                _repo.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                _UserRepo.Add(user);
+                _UserRepo.SaveChanges();
+                //return RedirectToAction(nameof(Index));
+                return RedirectToAction("ChoiceCandidate");
             }
             return View(user);
         }
@@ -70,7 +73,7 @@ namespace Online_Voting.Controllers
                 return NotFound();
             }
 
-            var user = _repo.GetByID(id);
+            var user = _UserRepo.GetByID(id);
             if (user == null)
             {
                 return NotFound();
@@ -94,8 +97,8 @@ namespace Online_Voting.Controllers
             {
                 try
                 {
-                    _repo.Update(user);
-                    _repo.SaveChanges();
+                    _UserRepo.Update(user);
+                    _UserRepo.SaveChanges();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -121,7 +124,7 @@ namespace Online_Voting.Controllers
                 return NotFound();
             }
 
-            var user = _repo.GetByID(id);
+            var user = _UserRepo.GetByID(id);
             if (user == null)
             {
                 return NotFound();
@@ -133,17 +136,24 @@ namespace Online_Voting.Controllers
         // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var user =_repo.GetByID(id);
-            _repo.Remove(id);
-            _repo.SaveChanges();
+            var user =_UserRepo.GetByID(id);
+            _UserRepo.Remove(id);
+            _UserRepo.SaveChanges();
             return RedirectToAction(nameof(Index));
+        }
+        
+        [HttpGet]
+        [Route("ChoiceCandidate")]
+        public IActionResult ChoiceCandidate()
+        {
+            return View(_CandidateRepo.GetAll());
         }
 
         private bool UserExists(int id)
         {
-            return _repo.Any(id);
+            return _UserRepo.Any(id);
         }
     }
 }
