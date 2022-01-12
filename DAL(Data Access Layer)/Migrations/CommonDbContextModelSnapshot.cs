@@ -43,8 +43,8 @@ namespace DAL_Data_Access_Layer_.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("LastName")
-                        .HasColumnType("int")
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
 
                     b.Property<string>("PhoneNumber")
@@ -71,8 +71,8 @@ namespace DAL_Data_Access_Layer_.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("LastName")
-                        .HasColumnType("int")
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
 
                     b.Property<string>("PhoneNumber")

@@ -14,7 +14,7 @@ namespace DAL_Data_Access_Layer_.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(maxLength: 20, nullable: false),
-                    LastName = table.Column<int>(maxLength: 20, nullable: false),
+                    LastName = table.Column<string>(maxLength: 20, nullable: false),
                     Age = table.Column<int>(nullable: false),
                     Email = table.Column<string>(maxLength: 50, nullable: false),
                     Gender = table.Column<string>(nullable: false),
@@ -31,7 +31,7 @@ namespace DAL_Data_Access_Layer_.Migrations
                 {
                     CandidateId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    LastName = table.Column<int>(maxLength: 20, nullable: false),
+                    LastName = table.Column<string>(maxLength: 20, nullable: false),
                     Age = table.Column<int>(nullable: false),
                     Gender = table.Column<string>(nullable: false),
                     PhoneNumber = table.Column<string>(maxLength: 10, nullable: false),

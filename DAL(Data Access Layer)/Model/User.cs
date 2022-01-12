@@ -10,29 +10,29 @@ namespace DAL_Data_Access_Layer_.Model
     {
         [Key]
         public int UserId { get; set; }
-        [Required]
-        [MaxLength(50)]
+        //[Required]
+        //[MaxLength(50)]
         public string FirstName { get; set; }
-        [Required]
+        //[Required]
         //[MaxLength(50)]
         public string LastName { get; set; }
-        [Required]
+        //[Required]
         public int Age { get; set; }
-        [Required]
-        [MaxLength(50)]
+        //[Required]
+        //[MaxLength(50)]
         public string Email { get; set; }
-        [Required]
+        //[Required]
         public string Gender { get; set; }
-        [Required]
-        [MaxLength(15)]
+        //[Required]
+        //[MaxLength(15)]
         public string PhoneNumber { get; set; }
-        [Required]
+        //[Required]
         public DateTime GetDateTime { get; set; }
-        [Required]
-        [MaxLength(100)]
+        //[Required]
+        //[MaxLength(100)]
         public string Address { get; set; }
-        [Required]
-        [MaxLength(15)]
+        //[Required]
+        //[MaxLength(15)]
         public int Pincode { get; set; }
         [ForeignKey("CandidateId")]
         //[InverseProperty("User")]

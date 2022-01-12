@@ -15,7 +15,7 @@ namespace DAL_Data_Access_Layer_.Model
         public static string FirstName { get; set; }
         [Required]
         [MaxLength(20)]
-        public int LastName { get; set; }
+        public string LastName { get; set; }
         [Required]
         public int Age { get; set; }
         [Required]

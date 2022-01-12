@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Online_Voting.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class UsersController : Controller
     {
         private readonly IUser _repo;
