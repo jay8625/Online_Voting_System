@@ -1,29 +1,32 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using DAL_Data_Access_Layer_.Data;
 using DAL_Data_Access_Layer_.Model;
 using Service_Layer.Repositories;
-using Microsoft.AspNetCore.Authorization;
 
 namespace Online_Voting.Controllers
 {
-    [Authorize]
-    public class UsersController : Controller
+    public class AdminsController : Controller
     {
-        private readonly IUser _repo;
+        private readonly IAdmin _Repo;
 
-        public UsersController(IUser repo)
+        public AdminsController(IAdmin repo)
         {
-            _repo = repo;
+            _Repo = repo;
         }
 
-        // GET: Users
+        // GET: Admins
         public IActionResult Index()
         {
-            return View(_repo.GetAll());
+            return View(_Repo.GetAll());
         }
 
-        // GET: Users/Details/5
+        // GET: Admins/Details/5
         public IActionResult Details(int id)
         {
             if (id == null)
@@ -31,38 +34,38 @@ namespace Online_Voting.Controllers
                 return NotFound();
             }
 
-            var user = _repo.GetByID(id);
-            if (user == null)
+            var admin = _Repo.GetByID(id);
+            if (admin == null)
             {
                 return NotFound();
             }
 
-            return View(user);
+            return View(admin);
         }
 
-        // GET: Users/Create
+        // GET: Admins/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Users/Create
+        // POST: Admins/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("UserId,FirstName,LastName,Age,Email,Gender,PhoneNumber,GetDateTime,Address,Pincode")] User user)
+        public IActionResult Create([Bind("Id,FirstName,LastName,Age,Email,Gender,PhoneNumber")] Admin admin)
         {
             if (ModelState.IsValid)
             {
-                _repo.Add(user);
-                _repo.SaveChanges();
+                _Repo.Add(admin);
+                _Repo.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return View(admin);
         }
 
-        // GET: Users/Edit/5
+        // GET: Admins/Edit/5
         public IActionResult Edit(int id)
         {
             if (id == null)
@@ -70,22 +73,22 @@ namespace Online_Voting.Controllers
                 return NotFound();
             }
 
-            var user = _repo.GetByID(id);
-            if (user == null)
+            var admin = _Repo.GetByID(id);
+            if (admin == null)
             {
                 return NotFound();
             }
-            return View(user);
+            return View(admin);
         }
 
-        // POST: Users/Edit/5
+        // POST: Admins/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("UserId,FirstName,LastName,Age,Email,Gender,PhoneNumber,GetDateTime,Address,Pincode")] User user)
+        public IActionResult Edit(int id, [Bind("Id,FirstName,LastName,Age,Email,Gender,PhoneNumber")] Admin admin)
         {
-            if (id != user.UserId)
+            if (id != admin.Id)
             {
                 return NotFound();
             }
@@ -94,12 +97,12 @@ namespace Online_Voting.Controllers
             {
                 try
                 {
-                    _repo.Update(user);
-                    _repo.SaveChanges();
+                    _Repo.Update(admin);
+                    _Repo.SaveChanges();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserExists(user.UserId))
+                    if (!AdminExists(admin.Id))
                     {
                         return NotFound();
                     }
@@ -110,10 +113,10 @@ namespace Online_Voting.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return View(admin);
         }
 
-        // GET: Users/Delete/5
+        // GET: Admins/Delete/5
         public IActionResult Delete(int id)
         {
             if (id == null)
@@ -121,29 +124,29 @@ namespace Online_Voting.Controllers
                 return NotFound();
             }
 
-            var user = _repo.GetByID(id);
-            if (user == null)
+            var admin = _Repo.GetByID(id);
+            if (admin == null)
             {
                 return NotFound();
             }
 
-            return View(user);
+            return View(admin);
         }
 
-        // POST: Users/Delete/5
+        // POST: Admins/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var user =_repo.GetByID(id);
-            _repo.Remove(id);
-            _repo.SaveChanges();
+            var admin = _Repo.GetByID(id);
+            _Repo.Remove(id);
+            _Repo.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UserExists(int id)
+        private bool AdminExists(int id)
         {
-            return _repo.Any(id);
+            return _Repo.Any(id);
         }
     }
 }

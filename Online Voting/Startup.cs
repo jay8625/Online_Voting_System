@@ -6,10 +6,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Service_Layer.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Online_Voting
 {
@@ -30,8 +26,10 @@ namespace Online_Voting
             {
                 option.UseSqlServer(Configuration.GetConnectionString("Default"));
             });
+            services.AddRazorPages();
             services.AddScoped<IUser, UserRepo>();
             services.AddScoped<ICandidate, CandidateRepo>();
+            services.AddScoped<IAdmin, AdminRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,7 +53,8 @@ namespace Online_Voting
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Users}/{action=Create}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }

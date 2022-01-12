@@ -9,15 +9,21 @@ namespace Service_Layer.Repositories
 {
     public class CandidateRepo : ICandidate
     {
-        private readonly CommonDbContext _Context;
+        private readonly CommonDbContext _context;
+
+        public CandidateRepo(CommonDbContext context)
+        {
+            _context = context;
+        }
+
         public void Add(Candidate candidate)
         {
-            _Context.Candidates.Add(candidate);
+            _context.Candidates.Add(candidate);
         }
 
         public bool Any(int Id)
         {
-            if (_Context.Candidates.Any(e => e.CandidateId == Id))
+            if (_context.Candidates.Any(e => e.CandidateId == Id))
             {
                 return true;
             }
@@ -26,28 +32,28 @@ namespace Service_Layer.Repositories
 
         public IEnumerable<Candidate> GetAll()
         {
-            return _Context.Candidates.ToList();
+            return _context.Candidates.ToList();
         }
 
         public Candidate GetByID(int Id)
         {
-            return _Context.Candidates.Where(x => x.CandidateId == Id).FirstOrDefault();
+            return _context.Candidates.Where(x => x.CandidateId == Id).FirstOrDefault();
         }
 
         public void Remove(int Id)
         {
-            Candidate Remove = _Context.Candidates.Find(Id);
-            _Context.Candidates.Remove(Remove);
+            Candidate Remove = _context.Candidates.Find(Id);
+            _context.Candidates.Remove(Remove);
         }
 
         public void SaveChanges()
         {
-            _Context.SaveChanges();
+            _context.SaveChanges();
         }
 
         public void Update(Candidate candidate)
         {
-            _Context.Entry(candidate).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _context.Entry(candidate).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
         }
     }
 }

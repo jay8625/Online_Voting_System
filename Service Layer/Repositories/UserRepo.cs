@@ -1,5 +1,6 @@
 ﻿using DAL_Data_Access_Layer_.Data;
 using DAL_Data_Access_Layer_.Model;
+using DAL_Data_Access_Layer_.vwModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,17 @@ namespace Service_Layer.Repositories
             _Context = Context;
         }
 
+        //public IEnumerable<vwUser> GetUsers()
+        //{
+        //    var data= _Context.Users.Select(s => s).ToList();
+        //    vwUser = data.Select(s=>new vwUser()
+        //    {
+        //        Id=s.UserId,
+        //        FirtsName=s.FirstName,
+        //        LastName=s.LastName
+        //    }).ToList();
+        //    return vwUsers;
+        //}
         public void Add(User user)
         {
             _Context.Users.Add(user);
@@ -57,3 +69,6 @@ namespace Service_Layer.Repositories
         }
     }
 }
+
+
+
