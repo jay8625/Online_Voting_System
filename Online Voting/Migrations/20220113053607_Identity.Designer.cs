@@ -10,7 +10,7 @@ using Online_Voting.Data;
 namespace Online_Voting.Migrations
 {
     [DbContext(typeof(Online_VotingContext))]
-    [Migration("20220112050956_Identity")]
+    [Migration("20220113053607_Identity")]
     partial class Identity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

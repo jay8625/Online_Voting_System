@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using DAL_Data_Access_Layer_.Model;
 using Service_Layer.Repositories;
@@ -7,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Online_Voting.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class UsersController : Controller
     {
         private readonly IUser _UserRepo;

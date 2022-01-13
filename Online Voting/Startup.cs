@@ -47,6 +47,7 @@ namespace Online_Voting
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
