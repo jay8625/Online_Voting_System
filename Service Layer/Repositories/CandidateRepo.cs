@@ -1,9 +1,8 @@
 ﻿using DAL_Data_Access_Layer_.Data;
 using DAL_Data_Access_Layer_.Model;
-using System;
+using Service_Layer.vwModel;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Service_Layer.Repositories
 {
@@ -16,9 +15,24 @@ namespace Service_Layer.Repositories
             _context = context;
         }
 
+        public List<vwCandidate> vwUsers()
+        {
+            List<vwCandidate> vwCandidates = new List<vwCandidate>();
+            vwCandidates = _context.Candidates.Select(u => new vwCandidate()
+            {
+                FirtsName = u.FirstName,
+                LastName = u.LastName,
+                Age = u.Age,
+                Gender = u.Gender,
+            }).ToList();
+            return vwCandidates;
+        }
+
+
         public void Add(Candidate candidate)
         {
             _context.Candidates.Add(candidate);
+            _context.SaveChanges();
         }
 
         public bool Any(int Id)
@@ -32,7 +46,7 @@ namespace Service_Layer.Repositories
 
         public IEnumerable<Candidate> GetAll()
         {
-            return _context.Candidates.ToList();
+                return _context.Candidates.ToList();
         }
 
         public Candidate GetByID(int Id)
@@ -44,16 +58,13 @@ namespace Service_Layer.Repositories
         {
             Candidate Remove = _context.Candidates.Find(Id);
             _context.Candidates.Remove(Remove);
-        }
-
-        public void SaveChanges()
-        {
             _context.SaveChanges();
         }
 
         public void Update(Candidate candidate)
         {
             _context.Entry(candidate).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _context.SaveChanges();
         }
     }
 }

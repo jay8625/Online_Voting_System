@@ -5,9 +5,9 @@ VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Online Voting", "Online Voting.csproj", "{3F972765-08F4-4672-ADE1-730740FDEBEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL(Data Access Layer)", "..\DAL(Data Access Layer)\DAL(Data Access Layer).csproj", "{122E7F2A-FAE9-4EB1-9AAF-3C9751193AF2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Online Voting DAL", "..\DAL(Data Access Layer)\Online Voting DAL.csproj", "{122E7F2A-FAE9-4EB1-9AAF-3C9751193AF2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service Layer", "..\Service Layer\Service Layer.csproj", "{A7664634-2DF3-400B-87D8-92B6DBFE0D60}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Online Voting Service", "..\Service Layer\Online Voting Service.csproj", "{A7664634-2DF3-400B-87D8-92B6DBFE0D60}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

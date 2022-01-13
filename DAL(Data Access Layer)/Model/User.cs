@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace DAL_Data_Access_Layer_.Model
 {
@@ -21,7 +19,6 @@ namespace DAL_Data_Access_Layer_.Model
         //[Required]
         //[MaxLength(50)]
         public string Email { get; set; }
-        //[Required]
         public string Gender { get; set; }
         //[Required]
         //[MaxLength(15)]
@@ -34,8 +31,8 @@ namespace DAL_Data_Access_Layer_.Model
         //[Required]
         //[MaxLength(15)]
         public int Pincode { get; set; }
-        [ForeignKey("CandidateId")]
-        //[InverseProperty("User")]
-        public virtual Candidate Candidates { get; set; }
+        public int? ChoiceCandidateId { get; set; }
+        [ForeignKey(nameof(ChoiceCandidateId))]
+        public virtual Candidate Candidate { get; set; }
     }
 }

@@ -1,14 +1,11 @@
 ﻿@model IEnumerable<DAL_Data_Access_Layer_.Model.Candidate>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "ViewCandidate";
 }
 
-<h1>Index</h1>
+<h1>Vote For Candidate</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -49,9 +46,7 @@
                 @Html.DisplayFor(modelItem => item.PhoneNumber)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.CandidateId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CandidateId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CandidateId">Delete</a>
+                <a class="btn btn-success" asp-action="ChoiceCandidate" asp-route-id="@item.CandidateId">Vote</a>
             </td>
         </tr>
 }

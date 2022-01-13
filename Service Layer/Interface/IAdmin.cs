@@ -12,7 +12,6 @@ namespace Service_Layer.Repositories
         void Update(Admin admin);
         bool Any(int Id);
         Admin GetByID(int Id);
-        void SaveChanges();
         void Remove(int Id);
     }
 }

@@ -15,12 +15,14 @@ namespace Online_Voting.Controllers
         }
 
         // GET: Admins
+        [HttpGet]
         public IActionResult Index()
         {
             return View(_Repo.GetAll());
         }
 
         // GET: Admins/Details/5
+        [HttpGet]
         public IActionResult Details(int id)
         {
             if (id == null)
@@ -38,6 +40,7 @@ namespace Online_Voting.Controllers
         }
 
         // GET: Admins/Create
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
@@ -53,13 +56,13 @@ namespace Online_Voting.Controllers
             if (ModelState.IsValid)
             {
                 _Repo.Add(admin);
-                _Repo.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             return View(admin);
         }
 
         // GET: Admins/Edit/5
+        [HttpGet]
         public IActionResult Edit(int id)
         {
             if (id == null)
@@ -92,7 +95,6 @@ namespace Online_Voting.Controllers
                 try
                 {
                     _Repo.Update(admin);
-                    _Repo.SaveChanges();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -111,6 +113,7 @@ namespace Online_Voting.Controllers
         }
 
         // GET: Admins/Delete/5
+        [HttpGet]
         public IActionResult Delete(int id)
         {
             if (id == null)
@@ -134,7 +137,6 @@ namespace Online_Voting.Controllers
         {
             var admin = _Repo.GetByID(id);
             _Repo.Remove(id);
-            _Repo.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 

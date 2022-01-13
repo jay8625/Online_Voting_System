@@ -17,7 +17,7 @@ namespace DAL_Data_Access_Layer_.Migrations
                     LastName = table.Column<string>(maxLength: 20, nullable: false),
                     Age = table.Column<int>(nullable: false),
                     Email = table.Column<string>(maxLength: 50, nullable: false),
-                    Gender = table.Column<string>(nullable: false),
+                    Gender = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(maxLength: 10, nullable: false)
                 },
                 constraints: table =>
@@ -31,11 +31,11 @@ namespace DAL_Data_Access_Layer_.Migrations
                 {
                     CandidateId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(maxLength: 20, nullable: false),
                     LastName = table.Column<string>(maxLength: 20, nullable: false),
                     Age = table.Column<int>(nullable: false),
-                    Gender = table.Column<string>(nullable: false),
-                    PhoneNumber = table.Column<string>(maxLength: 10, nullable: false),
-                    Votes = table.Column<int>(nullable: false)
+                    Gender = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(maxLength: 10, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -49,65 +49,37 @@ namespace DAL_Data_Access_Layer_.Migrations
                     UserId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(maxLength: 50, nullable: false),
-                    LastName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(maxLength: 50, nullable: false),
                     Age = table.Column<int>(nullable: false),
                     Email = table.Column<string>(maxLength: 50, nullable: false),
-                    Gender = table.Column<string>(nullable: false),
+                    Gender = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(maxLength: 15, nullable: false),
                     GetDateTime = table.Column<DateTime>(nullable: false),
                     Address = table.Column<string>(maxLength: 100, nullable: false),
                     Pincode = table.Column<int>(maxLength: 15, nullable: false),
-                    CandidateId = table.Column<int>(nullable: true)
+                    ChoiceCandidateId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.UserId);
                     table.ForeignKey(
-                        name: "FK_Users_Candidates_CandidateId",
-                        column: x => x.CandidateId,
+                        name: "FK_Users_Candidates_ChoiceCandidateId",
+                        column: x => x.ChoiceCandidateId,
                         principalTable: "Candidates",
                         principalColumn: "CandidateId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Votes",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    VoterChoice = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Votes", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Votes_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_CandidateId",
+                name: "IX_Users_ChoiceCandidateId",
                 table: "Users",
-                column: "CandidateId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Votes_UserId",
-                table: "Votes",
-                column: "UserId");
+                column: "ChoiceCandidateId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "Admins");
-
-            migrationBuilder.DropTable(
-                name: "Votes");
 
             migrationBuilder.DropTable(
                 name: "Users");

@@ -10,21 +10,20 @@ namespace DAL_Data_Access_Layer_.Model
 
         [Key]
         public int Id { get; set; }
-        //[Required]
-        //[MaxLength(20)]
+        [Required]
+        [MaxLength(20)]
         public string FirstName { get; set; }
-        //[Required]
-        //[MaxLength(20)]
+        [Required]
+        [MaxLength(20)]
         public string LastName { get; set; }
-        //[Required]
+        [Required]
         public int Age { get; set; }
-        //[Required]
-        //[MaxLength(50)]
+        [Required]
+        [MaxLength(50)]
         public string Email { get; set; }
-        //[Required]
         public string Gender { get; set; }
-        //[Required]
-        //[MaxLength(10)]
+        [Required]
+        [MaxLength(10)]
         public string PhoneNumber { get; set; }
     }
 }

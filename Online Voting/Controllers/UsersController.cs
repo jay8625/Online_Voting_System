@@ -3,15 +3,15 @@ using Microsoft.EntityFrameworkCore;
 using DAL_Data_Access_Layer_.Model;
 using Service_Layer.Repositories;
 using Microsoft.AspNetCore.Authorization;
+using System.Collections.Generic;
 
 namespace Online_Voting.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class UsersController : Controller
     {
         private readonly IUser _UserRepo;
         private readonly ICandidate _CandidateRepo;
-
         public UsersController(IUser repo, ICandidate candidateRepo)
         {
             _UserRepo = repo;
@@ -19,12 +19,14 @@ namespace Online_Voting.Controllers
         }
 
         // GET: Users
+        [HttpGet]
         public IActionResult Index()
         {
             return View(_UserRepo.GetAll());
         }
 
         // GET: Users/Details/5
+        [HttpGet]
         public IActionResult Details(int id)
         {
             if (id == null)
@@ -42,8 +44,10 @@ namespace Online_Voting.Controllers
         }
 
         // GET: Users/Create
+        [HttpGet]
         public IActionResult Create()
         {
+            ViewBag.Gender = new List<string> { "Male", "Female", "Other" };
             return View();
         }
 
@@ -57,9 +61,7 @@ namespace Online_Voting.Controllers
             if (ModelState.IsValid)
             {
                 _UserRepo.Add(user);
-                _UserRepo.SaveChanges();
-                //return RedirectToAction(nameof(Index));
-                return RedirectToAction("ChoiceCandidate");
+                return RedirectToAction("ViewCandidate");
             }
             return View(user);
         }
@@ -97,7 +99,6 @@ namespace Online_Voting.Controllers
                 try
                 {
                     _UserRepo.Update(user);
-                    _UserRepo.SaveChanges();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -110,12 +111,13 @@ namespace Online_Voting.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index");
             }
             return View(user);
         }
 
         // GET: Users/Delete/5
+        [HttpGet]
         public IActionResult Delete(int id)
         {
             if (id == null)
@@ -137,17 +139,26 @@ namespace Online_Voting.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            var user =_UserRepo.GetByID(id);
+            var user = _UserRepo.GetByID(id);
             _UserRepo.Remove(id);
-            _UserRepo.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
-        
+
+        //ChoiceCandidate
         [HttpGet]
-        [Route("ChoiceCandidate")]
-        public IActionResult ChoiceCandidate()
+        [Route("ViewCandidate")]
+        public IActionResult ViewCandidate()
         {
             return View(_CandidateRepo.GetAll());
+        }
+
+        [HttpGet]
+        [Route("ChoiceCandidate")]
+        public IActionResult ChoiceCandidate(int id)
+        {
+            var candidate=_CandidateRepo.GetByID(id);
+            _UserRepo.ChoiceCandidate(id);
+            return View(candidate);
         }
 
         private bool UserExists(int id)

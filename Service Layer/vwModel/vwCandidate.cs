@@ -1,14 +1,14 @@
-﻿using DAL_Data_Access_Layer_.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DAL_Data_Access_Layer_.vwModel
+namespace Service_Layer.vwModel
 {
-    public class vwUser
+    public class vwCandidate
     {
-        public int Id { get; set; }
         public string FirtsName { get; set; }
         public string LastName { get; set; }
+        public string Gender { get; set; }
+        public int Age { get; set; }
     }
 }

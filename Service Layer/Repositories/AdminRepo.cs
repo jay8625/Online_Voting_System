@@ -19,6 +19,7 @@ namespace Service_Layer.Repositories
         public void Add(Admin admin)
         {
             _Context.Admins.Add(admin);
+            _Context.SaveChanges();
         }
 
         public bool Any(int Id)
@@ -44,16 +45,13 @@ namespace Service_Layer.Repositories
         {
             Admin Remove = _Context.Admins.Find(Id);
             _Context.Admins.Remove(Remove);
-        }
-
-        public void SaveChanges()
-        {
             _Context.SaveChanges();
         }
 
         public void Update(Admin admin)
         {
             _Context.Entry(admin).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _Context.SaveChanges();
         }
     }
 }

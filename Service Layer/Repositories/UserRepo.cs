@@ -1,10 +1,8 @@
 ﻿using DAL_Data_Access_Layer_.Data;
 using DAL_Data_Access_Layer_.Model;
-using DAL_Data_Access_Layer_.vwModel;
-using System;
+using Service_Layer.vwModel;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Service_Layer.Repositories
 {
@@ -16,21 +14,16 @@ namespace Service_Layer.Repositories
         {
             _Context = Context;
         }
-
-        //public IEnumerable<vwUser> GetUsers()
-        //{
-        //    var data= _Context.Users.Select(s => s).ToList();
-        //    vwUser = data.Select(s=>new vwUser()
-        //    {
-        //        Id=s.UserId,
-        //        FirtsName=s.FirstName,
-        //        LastName=s.LastName
-        //    }).ToList();
-        //    return vwUsers;
-        //}
-        public void Add(User user)
+        public IEnumerable<vwUser> vwUsers()
         {
-            _Context.Users.Add(user);
+            IEnumerable<vwUser> vwUsers = new List<vwUser>();
+            vwUsers = _Context.Users.Select(u => new vwUser()
+            {
+                UserId=u.UserId,
+                FirstName = u.FirstName,
+                LastName = u.LastName
+            }).ToList();
+            return vwUsers;
         }
 
         public bool Any(int Id)
@@ -56,16 +49,26 @@ namespace Service_Layer.Repositories
         {
             User Remove = _Context.Users.Find(Id);
             _Context.Users.Remove(Remove);
-        }
-
-        public void SaveChanges()
-        {
             _Context.SaveChanges();
         }
 
         public void Update(User user)
         {
             _Context.Entry(user).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _Context.SaveChanges();
+        }
+
+        public void Add(User user)
+        {
+            _Context.Users.Add(user);
+            _Context.SaveChanges();
+        }
+
+        public void ChoiceCandidate(int Id)
+        {
+            object Choice = Id;
+            _Context.Users.Select(s => s);
+            _Context.SaveChanges();
         }
     }
 }

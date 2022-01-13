@@ -1,28 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.Mvc;
 
 namespace DAL_Data_Access_Layer_.Model
 {
     public class Candidate
     {
-
         [Key]
         public int CandidateId { get; set; }
-        //[Required]
-        //[MaxLength(20)]
+        [Required]
+        [MaxLength(20)]
         public string FirstName { get; set; }
-        //[Required]
-        //[MaxLength(20)]
+        [Required]
+        [MaxLength(20)]
         public string LastName { get; set; }
-        //[Required]
+        [Required]
         public int Age { get; set; }
-        //[Required]
         public string Gender { get; set; }
-        //[Required]
-        //[MaxLength(10)]
+        [Required]
+        [MaxLength(10)]
         public string PhoneNumber { get; set; }
-        public int Votes { get; set; }
+        //Navigation Properties
+        [InverseProperty("Candidate")]
+        public virtual ICollection<User> Users { get; set; }
     }
 }

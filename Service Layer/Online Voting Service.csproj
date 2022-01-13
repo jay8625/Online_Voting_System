@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DAL(Data Access Layer)\DAL(Data Access Layer).csproj" />
+    <ProjectReference Include="..\DAL(Data Access Layer)\Online Voting DAL.csproj" />
   </ItemGroup>
 
 </Project>

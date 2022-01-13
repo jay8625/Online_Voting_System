@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL_Data_Access_Layer_.Migrations
 {
     [DbContext(typeof(CommonDbContext))]
-    [Migration("20220111123909_Common")]
-    partial class Common
+    [Migration("20220113190501_Common1")]
+    partial class Common1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.22")
+                .HasAnnotation("ProductVersion", "3.1.21")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -42,11 +42,11 @@ namespace DAL_Data_Access_Layer_.Migrations
                         .HasMaxLength(20);
 
                     b.Property<string>("Gender")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("LastName")
-                        .HasColumnType("int")
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
 
                     b.Property<string>("PhoneNumber")
@@ -69,21 +69,23 @@ namespace DAL_Data_Access_Layer_.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
-                    b.Property<string>("Gender")
+                    b.Property<string>("FirstName")
                         .IsRequired()
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
+
+                    b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("LastName")
-                        .HasColumnType("int")
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(10)")
                         .HasMaxLength(10);
-
-                    b.Property<int>("Votes")
-                        .HasColumnType("int");
 
                     b.HasKey("CandidateId");
 
@@ -98,85 +100,47 @@ namespace DAL_Data_Access_Layer_.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CandidateId")
+                    b.Property<int?>("ChoiceCandidateId")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Gender")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("GetDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(15)")
-                        .HasMaxLength(15);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Pincode")
-                        .HasColumnType("int")
-                        .HasMaxLength(15);
+                        .HasColumnType("int");
 
                     b.HasKey("UserId");
 
-                    b.HasIndex("CandidateId");
+                    b.HasIndex("ChoiceCandidateId");
 
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("DAL_Data_Access_Layer_.Model.Vote", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("VoterChoice")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Votes");
-                });
-
             modelBuilder.Entity("DAL_Data_Access_Layer_.Model.User", b =>
                 {
-                    b.HasOne("DAL_Data_Access_Layer_.Model.Candidate", "Candidates")
-                        .WithMany()
-                        .HasForeignKey("CandidateId");
-                });
-
-            modelBuilder.Entity("DAL_Data_Access_Layer_.Model.Vote", b =>
-                {
-                    b.HasOne("DAL_Data_Access_Layer_.Model.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                    b.HasOne("DAL_Data_Access_Layer_.Model.Candidate", "Candidate")
+                        .WithMany("Users")
+                        .HasForeignKey("ChoiceCandidateId");
                 });
 #pragma warning restore 612, 618
         }
