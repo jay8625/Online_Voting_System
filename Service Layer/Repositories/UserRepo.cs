@@ -60,14 +60,14 @@ namespace Service_Layer.Repositories
 
         public void Add(User user)
         {
+            user.ChoiceCandidateId = 1;
             _Context.Users.Add(user);
             _Context.SaveChanges();
         }
 
         public void ChoiceCandidate(int Id)
         {
-            object Choice = Id;
-            _Context.Users.Select(s => s);
+            var Choice = _Context.Users.Select(s => s.ChoiceCandidateId.Equals(Id)).FirstOrDefault();
             _Context.SaveChanges();
         }
     }

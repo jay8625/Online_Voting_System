@@ -7,18 +7,42 @@ namespace Online_Voting.Controllers
 {
     public class AdminsController : Controller
     {
-        private readonly IAdmin _Repo;
+        private readonly IAdmin _AdminRepo;
+        private readonly IUser _UserRepo;
+        private readonly ICandidate _candidateRepo;
 
-        public AdminsController(IAdmin repo)
+        public AdminsController(IAdmin repo, IUser user, ICandidate candidateRepo)
         {
-            _Repo = repo;
+            _AdminRepo = repo;
+            _UserRepo = user;
+            _candidateRepo = candidateRepo;
+        }
+
+        [HttpGet]
+        public IActionResult AdminOptions()
+        {
+            return View();
         }
 
         // GET: Admins
         [HttpGet]
         public IActionResult Index()
         {
-            return View(_Repo.GetAll());
+            return View(_AdminRepo.GetAll());
+        }
+
+        //GET: Users
+        [HttpGet]
+        public IActionResult UserIndex()
+        {
+            return View(_UserRepo.GetAll());
+        }
+
+        //GET: Candidates
+        [HttpGet]
+        public IActionResult CandidateIndex()
+        {
+            return View(_candidateRepo.GetAll());
         }
 
         // GET: Admins/Details/5
@@ -30,7 +54,7 @@ namespace Online_Voting.Controllers
                 return NotFound();
             }
 
-            var admin = _Repo.GetByID(id);
+            var admin = _AdminRepo.GetByID(id);
             if (admin == null)
             {
                 return NotFound();
@@ -55,7 +79,7 @@ namespace Online_Voting.Controllers
         {
             if (ModelState.IsValid)
             {
-                _Repo.Add(admin);
+                _AdminRepo.Add(admin);
                 return RedirectToAction(nameof(Index));
             }
             return View(admin);
@@ -70,7 +94,7 @@ namespace Online_Voting.Controllers
                 return NotFound();
             }
 
-            var admin = _Repo.GetByID(id);
+            var admin = _AdminRepo.GetByID(id);
             if (admin == null)
             {
                 return NotFound();
@@ -94,7 +118,7 @@ namespace Online_Voting.Controllers
             {
                 try
                 {
-                    _Repo.Update(admin);
+                    _AdminRepo.Update(admin);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -121,7 +145,7 @@ namespace Online_Voting.Controllers
                 return NotFound();
             }
 
-            var admin = _Repo.GetByID(id);
+            var admin = _AdminRepo.GetByID(id);
             if (admin == null)
             {
                 return NotFound();
@@ -135,14 +159,14 @@ namespace Online_Voting.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            var admin = _Repo.GetByID(id);
-            _Repo.Remove(id);
+            var admin = _AdminRepo.GetByID(id);
+            _AdminRepo.Remove(id);
             return RedirectToAction(nameof(Index));
         }
 
         private bool AdminExists(int id)
         {
-            return _Repo.Any(id);
+            return _AdminRepo.Any(id);
         }
     }
 }

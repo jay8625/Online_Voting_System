@@ -48,15 +48,19 @@ namespace DAL_Data_Access_Layer_.Migrations
                 {
                     UserId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(maxLength: 50, nullable: false),
-                    LastName = table.Column<string>(maxLength: 50, nullable: false),
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: false),
                     Age = table.Column<int>(nullable: false),
-                    Email = table.Column<string>(maxLength: 50, nullable: false),
-                    Gender = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(maxLength: 15, nullable: false),
+                    Email = table.Column<string>(nullable: false),
+                    Gender = table.Column<string>(nullable: false),
+                    PhoneNumber = table.Column<string>(nullable: false),
                     GetDateTime = table.Column<DateTime>(nullable: false),
-                    Address = table.Column<string>(maxLength: 100, nullable: false),
-                    Pincode = table.Column<int>(maxLength: 15, nullable: false),
+                    AddressLine1 = table.Column<string>(nullable: false),
+                    AddressLine2 = table.Column<string>(nullable: false),
+                    City = table.Column<string>(nullable: false),
+                    State = table.Column<string>(nullable: false),
+                    Country = table.Column<string>(nullable: false),
+                    PostalPincode = table.Column<int>(nullable: false),
                     ChoiceCandidateId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -69,6 +73,11 @@ namespace DAL_Data_Access_Layer_.Migrations
                         principalColumn: "CandidateId",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Candidates",
+                columns: new[] { "CandidateId", "Age", "FirstName", "Gender", "LastName", "PhoneNumber" },
+                values: new object[] { 1, 33, "Status", "Male", "Not Voted", "1234567890" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_ChoiceCandidateId",

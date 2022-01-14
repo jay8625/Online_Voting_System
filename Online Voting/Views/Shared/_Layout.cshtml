@@ -16,6 +16,10 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        <partial name="_LoginPartial.cshtml" />
+                </div>
+                <a class="linkhifglight nav-link text-dark" asp-controller="Admins" asp-action="AdminOptions">Admin Login</a>
             </div>
         </nav>
     </header>

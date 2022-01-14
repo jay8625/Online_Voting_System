@@ -27,11 +27,22 @@ namespace DAL_Data_Access_Layer_.Model
         public DateTime GetDateTime { get; set; }
         //[Required]
         //[MaxLength(100)]
-        public string Address { get; set; }
+        public string AddressLine1 { get; set; }
+        //[Required]
+        //[MaxLength(100)]
+        public string AddressLine2 { get; set; }
+        //[Required]
+        //[MaxLength(20)]
+        public string City { get; set; }
+        //[Required]
+        //[MaxLength(20)]
+        public string State { get; set; }
+        //[MaxLength(20)]
+        public string Country { get; set; }
         //[Required]
         //[MaxLength(15)]
-        public int Pincode { get; set; }
-        public int? ChoiceCandidateId { get; set; }
+        public int PostalPincode { get; set; }
+        public int ChoiceCandidateId { get; set; }
         [ForeignKey(nameof(ChoiceCandidateId))]
         public virtual Candidate Candidate { get; set; }
     }

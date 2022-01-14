@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL_Data_Access_Layer_.Migrations
 {
     [DbContext(typeof(CommonDbContext))]
-    [Migration("20220113190501_Common1")]
-    partial class Common1
+    [Migration("20220114095821_Common")]
+    partial class Common
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -90,6 +90,17 @@ namespace DAL_Data_Access_Layer_.Migrations
                     b.HasKey("CandidateId");
 
                     b.ToTable("Candidates");
+
+                    b.HasData(
+                        new
+                        {
+                            CandidateId = 1,
+                            Age = 33,
+                            FirstName = "Status",
+                            Gender = "Male",
+                            LastName = "Not Voted",
+                            PhoneNumber = "1234567890"
+                        });
                 });
 
             modelBuilder.Entity("DAL_Data_Access_Layer_.Model.User", b =>
@@ -99,14 +110,23 @@ namespace DAL_Data_Access_Layer_.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address")
+                    b.Property<string>("AddressLine1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AddressLine2")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ChoiceCandidateId")
+                    b.Property<int>("ChoiceCandidateId")
                         .HasColumnType("int");
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -126,8 +146,11 @@ namespace DAL_Data_Access_Layer_.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Pincode")
+                    b.Property<int>("PostalPincode")
                         .HasColumnType("int");
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserId");
 
@@ -140,7 +163,9 @@ namespace DAL_Data_Access_Layer_.Migrations
                 {
                     b.HasOne("DAL_Data_Access_Layer_.Model.Candidate", "Candidate")
                         .WithMany("Users")
-                        .HasForeignKey("ChoiceCandidateId");
+                        .HasForeignKey("ChoiceCandidateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
