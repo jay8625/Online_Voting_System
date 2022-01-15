@@ -8,14 +8,10 @@ namespace Online_Voting.Controllers
     public class AdminsController : Controller
     {
         private readonly IAdmin _AdminRepo;
-        private readonly IUser _UserRepo;
-        private readonly ICandidate _candidateRepo;
 
-        public AdminsController(IAdmin repo, IUser user, ICandidate candidateRepo)
+        public AdminsController(IAdmin repo)
         {
             _AdminRepo = repo;
-            _UserRepo = user;
-            _candidateRepo = candidateRepo;
         }
 
         [HttpGet]
@@ -29,20 +25,6 @@ namespace Online_Voting.Controllers
         public IActionResult Index()
         {
             return View(_AdminRepo.GetAll());
-        }
-
-        //GET: Users
-        [HttpGet]
-        public IActionResult UserIndex()
-        {
-            return View(_UserRepo.GetAll());
-        }
-
-        //GET: Candidates
-        [HttpGet]
-        public IActionResult CandidateIndex()
-        {
-            return View(_candidateRepo.GetAll());
         }
 
         // GET: Admins/Details/5

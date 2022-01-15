@@ -21,7 +21,7 @@ namespace Online_Voting.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View(_UserRepo.GetAll());
+            return View(_UserRepo.vwUsers());
         }
 
         // GET: Users/Details/5

@@ -16,14 +16,13 @@ namespace Service_Layer.Repositories
         }
         public IEnumerable<vwUser> vwUsers()
         {
-            IEnumerable<vwUser> vwUsers = new List<vwUser>();
-            vwUsers = _Context.Users.Select(u => new vwUser()
+            return _Context.Users.Select(u => new vwUser()
             {
-                UserId=u.UserId,
+                UserId = u.UserId,
                 FirstName = u.FirstName,
-                LastName = u.LastName
-            }).ToList();
-            return vwUsers;
+                LastName = u.LastName,
+                VoteStatus=u.ChoiceCandidateId
+            });            
         }
 
         public bool Any(int Id)

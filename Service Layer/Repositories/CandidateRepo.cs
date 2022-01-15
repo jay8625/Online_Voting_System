@@ -13,21 +13,7 @@ namespace Service_Layer.Repositories
         public CandidateRepo(CommonDbContext context)
         {
             _context = context;
-        }
-
-        public List<vwCandidate> vwUsers()
-        {
-            List<vwCandidate> vwCandidates = new List<vwCandidate>();
-            vwCandidates = _context.Candidates.Select(u => new vwCandidate()
-            {
-                FirtsName = u.FirstName,
-                LastName = u.LastName,
-                Age = u.Age,
-                Gender = u.Gender,
-            }).ToList();
-            return vwCandidates;
-        }
-
+        }     
 
         public void Add(Candidate candidate)
         {
