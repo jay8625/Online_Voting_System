@@ -89,7 +89,7 @@ namespace Online_Voting.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CandidateId,FirstName,LastName,Age,Gender,PhoneNumber")] Candidate candidate)
+        public IActionResult Edit(int id, [Bind("CandidateId,FirstName,LastName,Age,Gender,PhoneNumber")] Candidate candidate)
         {
             if (id != candidate.CandidateId)
             {

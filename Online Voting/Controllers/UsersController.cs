@@ -3,8 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using DAL_Data_Access_Layer_.Model;
 using Service_Layer.Repositories;
 using Microsoft.AspNetCore.Authorization;
-using System.Collections.Generic;
-
+using System;
 namespace Online_Voting.Controllers
 {
     [Authorize]
@@ -47,7 +46,6 @@ namespace Online_Voting.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.Gender = new List<string> { "Male", "Female", "Other" };
             return View();
         }
 
@@ -61,6 +59,7 @@ namespace Online_Voting.Controllers
             if (ModelState.IsValid)
             {
                 _UserRepo.Add(user);
+                TempData["userId"] = user.UserId;
                 return RedirectToAction("ViewCandidate");
             }
             return View(user);
@@ -156,9 +155,11 @@ namespace Online_Voting.Controllers
         [Route("ChoiceCandidate")]
         public IActionResult ChoiceCandidate(int id)
         {
-            var candidate=_CandidateRepo.GetByID(id);
-            _UserRepo.ChoiceCandidate(id);
-            return View(candidate);
+            int userId = Convert.ToInt32(TempData["userId"]);
+            User user=_UserRepo.GetByID(userId);
+            user.ChoiceCandidateId = id;
+            _UserRepo.Update(user);
+            return View();
         }
 
         private bool UserExists(int id)

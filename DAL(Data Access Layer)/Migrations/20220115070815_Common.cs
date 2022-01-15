@@ -48,20 +48,20 @@ namespace DAL_Data_Access_Layer_.Migrations
                 {
                     UserId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(nullable: false),
-                    LastName = table.Column<string>(nullable: false),
+                    FirstName = table.Column<string>(maxLength: 10, nullable: false),
+                    LastName = table.Column<string>(maxLength: 50, nullable: false),
                     Age = table.Column<int>(nullable: false),
-                    Email = table.Column<string>(nullable: false),
+                    Email = table.Column<string>(maxLength: 50, nullable: false),
                     Gender = table.Column<string>(nullable: false),
-                    PhoneNumber = table.Column<string>(nullable: false),
+                    PhoneNumber = table.Column<string>(maxLength: 15, nullable: false),
                     GetDateTime = table.Column<DateTime>(nullable: false),
-                    AddressLine1 = table.Column<string>(nullable: false),
-                    AddressLine2 = table.Column<string>(nullable: false),
-                    City = table.Column<string>(nullable: false),
-                    State = table.Column<string>(nullable: false),
-                    Country = table.Column<string>(nullable: false),
+                    AddressLine1 = table.Column<string>(maxLength: 100, nullable: false),
+                    AddressLine2 = table.Column<string>(maxLength: 100, nullable: false),
+                    City = table.Column<string>(maxLength: 20, nullable: false),
+                    State = table.Column<string>(maxLength: 20, nullable: false),
+                    Country = table.Column<string>(maxLength: 20, nullable: true),
                     PostalPincode = table.Column<int>(nullable: false),
-                    ChoiceCandidateId = table.Column<int>(nullable: false)
+                    ChoiceCandidateId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -71,7 +71,7 @@ namespace DAL_Data_Access_Layer_.Migrations
                         column: x => x.ChoiceCandidateId,
                         principalTable: "Candidates",
                         principalColumn: "CandidateId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(

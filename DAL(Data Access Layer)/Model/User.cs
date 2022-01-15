@@ -8,41 +8,47 @@ namespace DAL_Data_Access_Layer_.Model
     {
         [Key]
         public int UserId { get; set; }
-        //[Required]
-        //[MaxLength(50)]
+        [Required(ErrorMessage ="Please Enter First Name")]
+        [MaxLength(10)]
+        [Display(Name ="First Name")]
         public string FirstName { get; set; }
-        //[Required]
-        //[MaxLength(50)]
+        [Required]
+        [MaxLength(50)]
+        [Display(Name ="Last Name")]
         public string LastName { get; set; }
-        //[Required]
+        [Required]
+        [RegularExpression(@"^(0?[1-9]|[1-9][0-9]|[1][1-9][1-9]|99)$",ErrorMessage ="Valid!,Enter Suitable Age")]
         public int Age { get; set; }
-        //[Required]
-        //[MaxLength(50)]
+        [Required]
+        [MaxLength(50)]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+        [Required(ErrorMessage ="Select Gender")]
         public string Gender { get; set; }
-        //[Required]
-        //[MaxLength(15)]
+        [Required]
+        [MaxLength(15)]
+        [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
-        //[Required]
+        [Required]
+        [Display(Name ="Date And Time")]
         public DateTime GetDateTime { get; set; }
-        //[Required]
-        //[MaxLength(100)]
+        [Required]
+        [MaxLength(100)]
         public string AddressLine1 { get; set; }
-        //[Required]
-        //[MaxLength(100)]
+        [Required]
+        [MaxLength(100)]
         public string AddressLine2 { get; set; }
-        //[Required]
-        //[MaxLength(20)]
+        [Required]
+        [MaxLength(20)]
         public string City { get; set; }
-        //[Required]
-        //[MaxLength(20)]
+        [Required]
+        [MaxLength(20)]
         public string State { get; set; }
-        //[MaxLength(20)]
+        [MaxLength(20)]
         public string Country { get; set; }
-        //[Required]
-        //[MaxLength(15)]
+        [Required]
         public int PostalPincode { get; set; }
-        public int ChoiceCandidateId { get; set; }
+        public int? ChoiceCandidateId { get; set; }
         [ForeignKey(nameof(ChoiceCandidateId))]
         public virtual Candidate Candidate { get; set; }
     }
