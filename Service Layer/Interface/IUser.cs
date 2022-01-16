@@ -9,11 +9,9 @@ namespace Service_Layer.Repositories
         IEnumerable<User> GetAll();
         IEnumerable<vwUser> vwUsers();
         void Update(User user);
-
         void Add(User user);
         bool Any(int Id);
         User GetByID(int Id);
         void Remove(int Id);
-        void ChoiceCandidate(int Id);
     }
 }

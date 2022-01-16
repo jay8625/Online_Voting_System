@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DAL_Data_Access_Layer_.Migrations
 {
-    public partial class Common : Migration
+    public partial class Commondb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -73,11 +73,6 @@ namespace DAL_Data_Access_Layer_.Migrations
                         principalColumn: "CandidateId",
                         onDelete: ReferentialAction.Restrict);
                 });
-
-            migrationBuilder.InsertData(
-                table: "Candidates",
-                columns: new[] { "CandidateId", "Age", "FirstName", "Gender", "LastName", "PhoneNumber" },
-                values: new object[] { 1, 33, "Status", "Male", "Not Voted", "1234567890" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_ChoiceCandidateId",

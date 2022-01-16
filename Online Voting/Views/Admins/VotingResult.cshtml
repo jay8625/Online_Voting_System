@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Service_Layer.vwModel.vwCandidate>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>E-Voting Results</h1>
+<a class="btn btn-danger text-white">Show Winning Candidate</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <h4>Candidate ID</h4>
+            </th>
+            <th>
+                <h4>First Name</h4>
+            </th>
+            <th>
+                <h4>Last Name</h4>
+            </th>
+            <th>
+                <h4>Votes</h4>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        int count=item.CandidateId-1;
+            int vote = @item.Votes.ElementAt(count);
+            <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CandidateId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @vote
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

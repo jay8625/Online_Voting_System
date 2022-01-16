@@ -88,17 +88,6 @@ namespace DAL_Data_Access_Layer_.Migrations
                     b.HasKey("CandidateId");
 
                     b.ToTable("Candidates");
-
-                    b.HasData(
-                        new
-                        {
-                            CandidateId = 1,
-                            Age = 33,
-                            FirstName = "Status",
-                            Gender = "Male",
-                            LastName = "Not Voted",
-                            PhoneNumber = "1234567890"
-                        });
                 });
 
             modelBuilder.Entity("DAL_Data_Access_Layer_.Model.User", b =>

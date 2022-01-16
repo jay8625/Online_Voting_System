@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Service_Layer.vwModel
 {
     public class vwCandidate
     {
-        public string FirtsName { get; set; }
+        public int CandidateId { get; set; }
+        public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Gender { get; set; }
-        public int Age { get; set; }
+        public List<int> Votes { get; set; }
     }
 }

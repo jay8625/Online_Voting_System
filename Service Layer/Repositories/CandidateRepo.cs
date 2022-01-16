@@ -13,7 +13,26 @@ namespace Service_Layer.Repositories
         public CandidateRepo(CommonDbContext context)
         {
             _context = context;
-        }     
+        }
+
+        public IEnumerable<vwCandidate> vwCandidates()
+        {
+            List<int> Vote = new List<int>();
+            int CandidateCount = _context.Candidates.Count();
+            for (int i = CandidateCount; i >= 1; i--)
+            {
+                var votes = _context.Users.Where(x => x.ChoiceCandidateId == i).Count();
+                Vote.Add(votes);
+            }
+            Vote.Reverse();
+            return _context.Candidates.Select(u => new vwCandidate()
+            {
+                CandidateId = u.CandidateId,
+                FirstName = u.FirstName,
+                LastName = u.LastName,
+                Votes= Vote
+            });;
+        }
 
         public void Add(Candidate candidate)
         {
@@ -32,7 +51,7 @@ namespace Service_Layer.Repositories
 
         public IEnumerable<Candidate> GetAll()
         {
-                return _context.Candidates.ToList();
+            return _context.Candidates.ToList();
         }
 
         public Candidate GetByID(int Id)
@@ -51,6 +70,17 @@ namespace Service_Layer.Repositories
         {
             _context.Entry(candidate).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             _context.SaveChanges();
+        }
+        public IEnumerable<int> votes()
+        {
+            List<int> Vote = new List<int>();
+            int CandidateCount = _context.Candidates.Count();
+            for (int Candidates = CandidateCount; Candidates < 1; Candidates--)
+            {
+                var votes = _context.Users.Where(x => x.ChoiceCandidateId == Candidates).Count();
+                Vote.Add(votes);
+            }
+            return Vote;
         }
     }
 }

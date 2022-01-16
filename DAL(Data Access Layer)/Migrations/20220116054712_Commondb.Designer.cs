@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL_Data_Access_Layer_.Migrations
 {
     [DbContext(typeof(CommonDbContext))]
-    [Migration("20220115070815_Common")]
-    partial class Common
+    [Migration("20220116054712_Commondb")]
+    partial class Commondb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -90,17 +90,6 @@ namespace DAL_Data_Access_Layer_.Migrations
                     b.HasKey("CandidateId");
 
                     b.ToTable("Candidates");
-
-                    b.HasData(
-                        new
-                        {
-                            CandidateId = 1,
-                            Age = 33,
-                            FirstName = "Status",
-                            Gender = "Male",
-                            LastName = "Not Voted",
-                            PhoneNumber = "1234567890"
-                        });
                 });
 
             modelBuilder.Entity("DAL_Data_Access_Layer_.Model.User", b =>

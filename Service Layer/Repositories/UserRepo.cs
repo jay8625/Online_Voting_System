@@ -21,8 +21,8 @@ namespace Service_Layer.Repositories
                 UserId = u.UserId,
                 FirstName = u.FirstName,
                 LastName = u.LastName,
-                VoteStatus=u.ChoiceCandidateId
-            });            
+                VoteStatus = u.ChoiceCandidateId
+            });
         }
 
         public bool Any(int Id)
@@ -62,14 +62,9 @@ namespace Service_Layer.Repositories
             _Context.Users.Add(user);
             _Context.SaveChanges();
         }
-
-        public void ChoiceCandidate(int Id)
-        {
-            var Choice = _Context.Users.Select(s => s.ChoiceCandidateId);
-            _Context.SaveChanges();
-        }
     }
 }
 
+            
 
 

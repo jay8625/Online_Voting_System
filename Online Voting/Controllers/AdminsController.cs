@@ -8,16 +8,23 @@ namespace Online_Voting.Controllers
     public class AdminsController : Controller
     {
         private readonly IAdmin _AdminRepo;
-
-        public AdminsController(IAdmin repo)
+        private readonly ICandidate _CandidateRepo;
+        public AdminsController(IAdmin repo, ICandidate candidateRepo)
         {
             _AdminRepo = repo;
+            _CandidateRepo = candidateRepo;
         }
 
         [HttpGet]
         public IActionResult AdminOptions()
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult VotingResult()
+        {
+            return View(_CandidateRepo.vwCandidates());
         }
 
         // GET: Admins
