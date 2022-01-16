@@ -4,12 +4,16 @@
 @{
     ViewData["Title"] = "Log in";
 }
-
-<h1 style="text-align:center">@ViewData["Title"]</h1>
+<style>
+    .center{
+        text-align:center;
+    }
+</style>
 <div class="row">
     <div style="margin-left:28vw;" class="col-md-4 border border-info">
         <section>
             <form id="account" method="post">
+                <h1 class="center">Login</h1>
                 <h4>Use a local account to log in.</h4>
                 <hr />
                 <div asp-validation-summary="All" class="text-danger"></div>

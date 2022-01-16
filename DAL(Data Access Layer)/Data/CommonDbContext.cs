@@ -1,9 +1,10 @@
 ﻿using DAL_Data_Access_Layer_.Model;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace DAL_Data_Access_Layer_.Data
 {
-    public class CommonDbContext : DbContext
+    public class CommonDbContext : IdentityDbContext
     {
         public CommonDbContext(DbContextOptions options) : base(options) { }
         public DbSet<Candidate> Candidates { get; set; }

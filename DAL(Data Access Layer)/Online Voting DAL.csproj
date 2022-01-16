@@ -10,6 +10,14 @@
     <Compile Remove="Migrations\20220114095821_Common.Designer.cs" />
     <Compile Remove="Migrations\20220115070815_Common.cs" />
     <Compile Remove="Migrations\20220115070815_Common.Designer.cs" />
+    <Compile Remove="Migrations\20220116054712_Commondb.cs" />
+    <Compile Remove="Migrations\20220116054712_Commondb.Designer.cs" />
+    <Compile Remove="Migrations\Online_Voting\20220114103550_Identity.cs" />
+    <Compile Remove="Migrations\Online_Voting\20220114103550_Identity.Designer.cs" />
+    <Compile Remove="Migrations\Online_Voting\20220116191232_Identity.cs" />
+    <Compile Remove="Migrations\Online_Voting\20220116191232_Identity.Designer.cs" />
+    <Compile Remove="Migrations\Online_Voting\20220116191802_Identity.cs" />
+    <Compile Remove="Migrations\Online_Voting\20220116191802_Identity.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +29,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\Online_Voting\" />
   </ItemGroup>
 
 </Project>
