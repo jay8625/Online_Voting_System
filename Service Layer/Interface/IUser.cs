@@ -13,5 +13,9 @@ namespace Service_Layer.Repositories
         bool Any(int Id);
         User GetByID(int Id);
         void Remove(int Id);
+        List<vwUser> SortFirstName();
+        List<vwUser> SortLastName();
+        List<vwUser> SortVote();
+
     }
 }

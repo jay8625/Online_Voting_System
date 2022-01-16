@@ -4,6 +4,10 @@ using DAL_Data_Access_Layer_.Model;
 using Service_Layer.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using System;
+using Service_Layer.vwModel;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace Online_Voting.Controllers
 {
     [Authorize]
@@ -19,9 +23,16 @@ namespace Online_Voting.Controllers
 
         // GET: Users
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(string search)
         {
-            return View(_UserRepo.vwUsers());
+            var data = _UserRepo.vwUsers().ToList();
+            if (search != null)
+            {
+                string searchLower = search.ToLower();
+                data = data.Where(x => x.FirstName.ToLower().Contains(searchLower) || x.LastName.ToLower().Contains(searchLower)).ToList();
+                return View(data);
+            }
+            return View(data);
         }
 
         // GET: Users/Details/5
@@ -160,6 +171,27 @@ namespace Online_Voting.Controllers
             user.ChoiceCandidateId = id;
             _UserRepo.Update(user);
             return View();
+        }
+
+        [HttpGet]
+        [Route("SortFirstName")]
+        public IActionResult SortFirstName()
+        { 
+            return View("Index",_UserRepo.SortFirstName());
+        }
+
+        [HttpGet]
+        [Route("SortLastName")]
+        public IActionResult SortLastName()
+        {
+            return View("Index", _UserRepo.SortLastName());
+        }
+
+        [HttpGet]
+        [Route("SortbyVote")]
+        public IActionResult SortbyVote()
+        {
+            return View("Index", _UserRepo.SortVote());
         }
 
         private bool UserExists(int id)

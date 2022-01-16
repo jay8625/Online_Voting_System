@@ -7,6 +7,15 @@ a.navbar-brand {
   word-break: break-all;
 }
 
+.hover:hover{
+    background-color:aquamarine;
+}
+
+.modal-content{
+    height:500px;
+    width:700px;
+}
+
 .allmargin {
     margin: 20px;
 }

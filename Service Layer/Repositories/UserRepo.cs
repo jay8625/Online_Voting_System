@@ -62,6 +62,47 @@ namespace Service_Layer.Repositories
             _Context.Users.Add(user);
             _Context.SaveChanges();
         }
+
+        public List<vwUser> SortFirstName()
+        {
+            List<vwUser> Sorted=_Context.Users.Select(s=>new vwUser
+            {
+                FirstName = s.FirstName,
+                LastName = s.LastName,
+                UserId = s.UserId,
+                VoteStatus=s.ChoiceCandidateId
+            }).OrderBy(x => x.FirstName).ToList();
+            return Sorted;
+        }
+
+        public List<vwUser> SortLastName()
+        {
+            List<vwUser> Sorted = _Context.Users.Select(s => new vwUser
+            {
+                FirstName = s.FirstName,
+                LastName = s.LastName,
+                UserId = s.UserId,
+                VoteStatus = s.ChoiceCandidateId
+            }).OrderBy(x => x.LastName).ToList();
+            return Sorted;
+        }
+
+        public List<vwUser> SortVote()
+        {
+            List<vwUser> Sorted = _Context.Users.Select(s => new vwUser
+            {
+                FirstName = s.FirstName,
+                LastName = s.LastName,
+                UserId = s.UserId,
+                VoteStatus = s.ChoiceCandidateId
+            }).OrderBy(x => x.VoteStatus).ToList();
+            return Sorted;
+        }
+
+        public void SortLastName(User user)
+        {
+            _Context.Users.OrderByDescending(x => x.LastName);
+        }
     }
 }
 
