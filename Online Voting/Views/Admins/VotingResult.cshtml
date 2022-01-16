@@ -1,48 +1,88 @@
 ﻿@model IEnumerable<Service_Layer.vwModel.vwCandidate>
 
-@{
+    @{
     ViewData["Title"] = "Index";
-}
+    }
+    <style>
+        .winner{background-color:green;color:white;}
+        #firstcellradius{-webkit-border-bottom-left-radius:20px;-webkit-border-top-left-radius:20px;}
+        #secondcellradius{-webkit-border-bottom-right-radius:20px; border-top-right-radius: 20px}
+    </style>
 
-<h1>E-Voting Results</h1>
-<a class="btn btn-danger text-white">Show Winning Candidate</a>
+    <h1>E-Voting Results</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                <h4>Candidate ID</h4>
-            </th>
-            <th>
-                <h4>First Name</h4>
-            </th>
-            <th>
-                <h4>Last Name</h4>
-            </th>
-            <th>
-                <h4>Votes</h4>
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        int count=item.CandidateId-1;
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <h4>Candidate ID</h4>
+                </th>
+                <th>
+                    <h4>First Name</h4>
+                </th>
+                <th>
+                    <h4>Last Name</h4>
+                </th>
+                <th>
+                    <h4>Votes</h4>
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) {
+            int count=item.CandidateId-1;
             int vote = @item.Votes.ElementAt(count);
             <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CandidateId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @vote
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                @if (item.Votes.Max()==vote)
+                {
+                <td id="firstcellradius" class="winner">
+                    @Html.DisplayFor(modelItem => item.CandidateId)
+                </td>
+                }
+                else
+                {
+                <td>
+                    @Html.DisplayFor(modelItem => item.CandidateId)
+                </td>
+                }
+                @if (item.Votes.Max()==vote)
+                {
+                <td class="winner">
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                }
+                else
+                {
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                }
+                @if (item.Votes.Max()==vote)
+                {
+                <td class="winner">
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                }
+                else
+                {
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                }
+                @if (item.Votes.Max()==vote)
+                {
+                <td id="secondcellradius" class="winner">
+                    @vote
+                </td>
+                }
+                else
+                {
+                <td>
+                    @vote
+                </td>
+                }
+            </tr>
+            }
+        </tbody>
+    </table>
