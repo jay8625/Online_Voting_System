@@ -2,106 +2,115 @@
 
     @{
     ViewData["Title"] = "Index";
-    }
+}
 
-    <h1>E-Voting Results</h1>
+<h1>E-Voting Results</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    <h4>Candidate ID</h4>
-                </th>
-                <th>
-                    <h4>First Name</h4>
-                </th>
-                <th>
-                    <h4>Last Name</h4>
-                </th>
-                <th>
-                    <h4>Votes</h4>
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @{
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <h4>Candidate ID</h4>
+            </th>
+            <th>
+                <h4>First Name</h4>
+            </th>
+            <th>
+                <h4>Last Name</h4>
+            </th>
+            <th>
+                <h4>Votes</h4>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
             int winner = 0;
             int TotalCandidate = 0;
-            }
-            @foreach (var item in Model) {
-            int count=item.CandidateId-1;
+            string winnerName = " ";
+        }
+        @foreach (var item in Model)
+        {
+            int count = item.CandidateId - 1;
             int vote = @item.Votes.ElementAt(count);
             <tr>
-                @if (item.Votes.Max()==vote)
+                @if (item.Votes.Max() == vote)
                 {
-                winner++;
-                TotalCandidate++;
-                <td id="firstcellradius" class="winner">
-                    @Html.DisplayFor(modelItem => item.CandidateId)
-                </td>
+                    winner++;
+                    TotalCandidate++;
+                    <td id="firstcellradius" class="winner">
+                        @Html.DisplayFor(modelItem => item.CandidateId)
+                    </td>
+                        winnerName = item.FirstName+" "+item.LastName;
                 }
                 else
                 {
-                TotalCandidate++;
-                <td>
-                    @Html.DisplayFor(modelItem => item.CandidateId)
-                </td>
+                    TotalCandidate++;
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CandidateId)
+                    </td>
                 }
-                @if (item.Votes.Max()==vote)
+                @if (item.Votes.Max() == vote)
                 {
-                <td class="winner">
-                    @Html.DisplayFor(modelItem => item.FirstName)
-                </td>
-                }
-                else
-                {
-                <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
-                </td>
-                }
-                @if (item.Votes.Max()==vote)
-                {
-                <td class="winner">
-                    @Html.DisplayFor(modelItem => item.LastName)
-                </td>
+                    <td class="winner">
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
                 }
                 else
                 {
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
-                </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
                 }
-                @if (item.Votes.Max()==vote)
+                @if (item.Votes.Max() == vote)
                 {
-                <td id="secondcellradius" class="winner">
-                    @vote
-                </td>
+                    <td class="winner">
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
                 }
                 else
                 {
-                <td>
-                    @vote
-                </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                }
+                @if (item.Votes.Max() == vote)
+                {
+                    <td id="secondcellradius" class="winner">
+                        @vote
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @vote
+                    </td>
                 }
             </tr>
-            }
-            @{
-            if (winner>1&&winner!=TotalCandidate)
+        }
+        @{
+            if (winner > 1 && winner != TotalCandidate)
             {
-            <tr>
-                <p id="tie">Their is Tie between Highlighted Candidates</p>
-            </tr>
+                <tr>
+                    <p id="tie">Their is Tie between Highlighted Candidates</p>
+                </tr>
             }
             else
             {
-            if (winner>1&&winner==TotalCandidate)
-            {
-            <tr>
-                <h3 id="start">Voting is yet to start</h3>
-            </tr>
+                if (winner > 1 && winner == TotalCandidate)
+                {
+                    <tr>
+                        <h3 id="start">Voting is yet to start</h3>
+                    </tr>
+                }
+                else
+                {
+                     <tr>
+                        <h3 id="start">Winner Is - @winnerName</h3>
+                    </tr>
+                }
             }
-            }
-            }
-        </tbody>
-    </table>
+        }
+    </tbody>
+</table>

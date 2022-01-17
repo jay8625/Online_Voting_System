@@ -4,9 +4,11 @@ using DAL_Data_Access_Layer_.Model;
 using Service_Layer.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using System;
-using Service_Layer.vwModel;
-using System.Collections.Generic;
 using System.Linq;
+using Online_Voting.Areas.Identity.Pages.Account;
+using Online_Voting_DAL.Data;
+using Online_Voting.Areas.Identity.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace Online_Voting.Controllers
 {
@@ -15,10 +17,12 @@ namespace Online_Voting.Controllers
     {
         private readonly IUser _UserRepo;
         private readonly ICandidate _CandidateRepo;
-        public UsersController(IUser repo, ICandidate candidateRepo)
+        private readonly SignInManager<Online_VotingUser> _signinManager;
+        public UsersController(IUser repo, ICandidate candidateRepo, Online_VotingContext identityContext, UserManager<Online_VotingUser> userManager, SignInManager<Online_VotingUser> signinManager)
         {
             _UserRepo = repo;
             _CandidateRepo = candidateRepo;
+            _signinManager = signinManager;
         }
 
         // GET: Users
@@ -166,18 +170,32 @@ namespace Online_Voting.Controllers
         [Route("ChoiceCandidate")]
         public IActionResult ChoiceCandidate(int id)
         {
+            string email = TempData["email"].ToString();
             int userId = Convert.ToInt32(TempData["userId"]);
-            User user=_UserRepo.GetByID(userId);
-            user.ChoiceCandidateId = id;
-            _UserRepo.Update(user);
-            return View();
+            User user = _UserRepo.GetByID(userId);
+            try
+            {
+                if ( email== user.Email)
+                {
+                    user.ChoiceCandidateId = id;
+                    _UserRepo.Update(user);
+                    return View();
+                }
+                else
+                    return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {
+
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         [HttpGet]
         [Route("SortFirstName")]
         public IActionResult SortFirstName()
-        { 
-            return View("Index",_UserRepo.SortFirstName());
+        {
+            return View("Index", _UserRepo.SortFirstName());
         }
 
         [HttpGet]

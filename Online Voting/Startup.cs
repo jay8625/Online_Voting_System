@@ -26,6 +26,7 @@ namespace Online_Voting
             {
                 option.UseSqlServer(Configuration.GetConnectionString("Default"));
             });
+            services.AddAuthorization(options =>options.AddPolicy("AdminApp",policy => policy.RequireClaim("Manager")));
             services.AddRazorPages();
             services.AddScoped<IUser, UserRepo>();
             services.AddScoped<ICandidate, CandidateRepo>();
