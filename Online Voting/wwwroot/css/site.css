@@ -11,8 +11,13 @@ a.navbar-brand {
     background-color:aquamarine;
 }
 
+.looser {
+    background-color: #d9534f;
+    color: white;
+}
+
 .winner {
-    background-color: green;
+    background-color: #5cb85c;
     color: white;
 }
 

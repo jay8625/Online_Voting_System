@@ -35,14 +35,25 @@
             int count = item.CandidateId - 1;
             int vote = @item.Votes.ElementAt(count);
             <tr>
-                @if (item.Votes.Max() == vote)
+                @if (item.Votes.Max() == vote || item.Votes.Min() == vote)
                 {
-                    winner++;
-                    TotalCandidate++;
-                    <td id="firstcellradius" class="winner">
-                        @Html.DisplayFor(modelItem => item.CandidateId)
-                    </td>
-                        winnerName = item.FirstName+" "+item.LastName;
+                    if (item.Votes.Max() == vote)
+                    {
+                        winner++;
+                        TotalCandidate++;
+                        <td id="firstcellradius" class="winner">
+                            @Html.DisplayFor(modelItem => item.CandidateId)
+                        </td>
+                        winnerName = item.FirstName + " " + item.LastName;
+                    }
+
+                    @if (item.Votes.Min() == vote)
+                    {
+                        TotalCandidate++;
+                        <td id="firstcellradius" class="looser">
+                            @Html.DisplayFor(modelItem => item.CandidateId)
+                        </td>
+                    }
                 }
                 else
                 {
@@ -51,11 +62,20 @@
                         @Html.DisplayFor(modelItem => item.CandidateId)
                     </td>
                 }
-                @if (item.Votes.Max() == vote)
+                @if (item.Votes.Max() == vote || item.Votes.Min() == vote)
                 {
-                    <td class="winner">
-                        @Html.DisplayFor(modelItem => item.FirstName)
-                    </td>
+                    if (item.Votes.Max() == vote)
+                    {
+                        <td class="winner">
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                        </td>
+                    }
+                    @if (item.Votes.Min() == vote)
+                    {
+                        <td class="looser">
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                        </td>
+                    }
                 }
                 else
                 {
@@ -63,11 +83,20 @@
                         @Html.DisplayFor(modelItem => item.FirstName)
                     </td>
                 }
-                @if (item.Votes.Max() == vote)
+                @if (item.Votes.Max() == vote || item.Votes.Min() == vote)
                 {
-                    <td class="winner">
-                        @Html.DisplayFor(modelItem => item.LastName)
-                    </td>
+                    if (item.Votes.Max() == vote)
+                    {
+                        <td class="winner">
+                            @Html.DisplayFor(modelItem => item.LastName)
+                        </td>
+                    }
+                    @if (item.Votes.Min() == vote)
+                    {
+                        <td class="looser">
+                            @Html.DisplayFor(modelItem => item.LastName)
+                        </td>
+                    }
                 }
                 else
                 {
@@ -75,11 +104,20 @@
                         @Html.DisplayFor(modelItem => item.LastName)
                     </td>
                 }
-                @if (item.Votes.Max() == vote)
+                @if (item.Votes.Max() == vote || item.Votes.Min() == vote)
                 {
-                    <td id="secondcellradius" class="winner">
-                        @vote
-                    </td>
+                    if (item.Votes.Max() == vote)
+                    {
+                        <td id="secondcellradius" class="winner">
+                            @vote
+                        </td>
+                    }
+                    @if (item.Votes.Min() == vote)
+                    {
+                        <td id="secondcellradius" class="looser">
+                            @vote
+                        </td>
+                    }
                 }
                 else
                 {
@@ -106,7 +144,7 @@
                 }
                 else
                 {
-                     <tr>
+                    <tr>
                         <h3 id="start">Winner Is - @winnerName</h3>
                     </tr>
                 }
