@@ -11,6 +11,45 @@ a.navbar-brand {
     background-color:aquamarine;
 }
 
+.winner {
+    background-color: green;
+    color: white;
+}
+
+#firstcellradius {
+    -webkit-border-bottom-left-radius: 20px;
+    -webkit-border-top-left-radius: 20px;
+}
+
+#secondcellradius {
+    -webkit-border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px
+}
+
+#tie {
+    height: 50px;
+    text-align: center;
+    padding-top: 7px;
+    -webkit-border-bottom-left-radius: 20px;
+    -webkit-border-top-left-radius: 20px;
+    -webkit-border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    background-color: #d9534f;
+    color: white;
+}
+
+#start {
+    height: 50px;
+    text-align: center;
+    padding-top: 7px;
+    -webkit-border-bottom-left-radius: 20px;
+    -webkit-border-top-left-radius: 20px;
+    -webkit-border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    background-color: #292b2c;
+    color: white;
+}
+
 .modal-content{
     height:500px;
     width:700px;
