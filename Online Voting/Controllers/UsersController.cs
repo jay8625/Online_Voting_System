@@ -9,6 +9,7 @@ using Online_Voting.Areas.Identity.Pages.Account;
 using Online_Voting_DAL.Data;
 using Online_Voting.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 
 namespace Online_Voting.Controllers
 {
@@ -173,13 +174,17 @@ namespace Online_Voting.Controllers
             string email = TempData["email"].ToString();
             int userId = Convert.ToInt32(TempData["userId"]);
             User user = _UserRepo.GetByID(userId);
+            var vwUsers = _UserRepo.vwUsers();
+            IEnumerable<int> User = _UserRepo.GetAll().Where(x => x.Email == email).Select(s=>s.UserId);
+            ViewBag.UserId = User;
+
             try
             {
                 if (email == user.Email)
                 {
                     user.ChoiceCandidateId = id;
                     _UserRepo.Update(user);
-                    return View();
+                    return View(_UserRepo.vwUsers());
                 }
                 else
                     _UserRepo.Remove(userId);

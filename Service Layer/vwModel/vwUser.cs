@@ -1,4 +1,7 @@
-﻿namespace Service_Layer.vwModel
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace Service_Layer.vwModel
 {
     public class vwUser 
     {
@@ -7,6 +10,8 @@
         public string LastName { get; set; }
         public int? VoteStatus { get; set; }
         public string CandidateName { get; set; }
+        [Display(Name = "Date Time")]
+        public DateTime dateTime { get; set; }
     }
     
 }

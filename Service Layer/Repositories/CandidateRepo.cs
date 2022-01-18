@@ -30,8 +30,8 @@ namespace Service_Layer.Repositories
                 CandidateId = u.CandidateId,
                 FirstName = u.FirstName,
                 LastName = u.LastName,
-                Votes= Vote
-            });;
+                GainedVotes = Vote.ElementAt(u.CandidateId-1)
+            });
         }
 
         public void Add(Candidate candidate)

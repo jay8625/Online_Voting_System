@@ -23,6 +23,7 @@ namespace Service_Layer.Repositories
                 LastName = u.LastName,
                 VoteStatus = u.ChoiceCandidateId,
                 CandidateName=_Context.Candidates.Where(x=>x.CandidateId==u.ChoiceCandidateId).Select(s=>s.FirstName+" "+s.LastName).FirstOrDefault(),
+                dateTime=u.GetDateTime
             });
         }
 

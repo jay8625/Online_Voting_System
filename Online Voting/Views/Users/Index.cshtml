@@ -3,7 +3,11 @@
 @{
     ViewData["Title"] = "Index";
 }
-
+<style>
+    .dt{
+    width:150px;
+}
+</style>
     <h1>List Of Voted Users</h1>
 <form class="example">
   <input type="text" placeholder="Name of User" name="search">
@@ -26,6 +30,9 @@
             <th>
                 <a class="text-dark text-decoration-none" asp-controller="Users" asp-action="SortbyVote">@Html.DisplayNameFor(model => model.VoteStatus)<i class="bi bi-sort-up"></i></a>
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dateTime)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -42,12 +49,11 @@
                 @Html.DisplayFor(modelItem => item.LastName)
             </td>
             <td>
-                    @if (item.VoteStatus==null)
-                    {
-                        <p>Not Voted</p>
-                    }
-                    @Html.DisplayFor(modelItem => item.VoteStatus)-
-                    @Html.DisplayFor(modelItem=>item.CandidateName)
+                @Html.DisplayFor(modelItem => item.VoteStatus)-
+                @Html.DisplayFor(modelItem=>item.CandidateName)
+            </td>
+             <td class="dt">
+                @Html.DisplayFor(modelItem => item.dateTime)
             </td>
             <td>
                 <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.UserId">Edit</a> |

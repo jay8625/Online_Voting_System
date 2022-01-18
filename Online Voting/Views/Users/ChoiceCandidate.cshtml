@@ -1,10 +1,14 @@
-﻿@model DAL_Data_Access_Layer_.Model.Candidate
+﻿@model IEnumerable<Service_Layer.vwModel.vwUser>
+@using System.Linq
+
 
 @{
-    ViewData["Title"] = "ChoiceCandidate";
+    ViewData["Title"] = "Index";
+    IEnumerable<int> j = ViewBag.UserId;
 }
+
 <style>
-    #margin{margin-top: 90px;}
+    #margin{margin-top: 90px;height:500px;}
     .margin{margin-bottom:120px;}
     #Logout1{color:white;}
 </style>
@@ -12,5 +16,61 @@
     <h1 class="display-4" ><strong>Thanks For Voting</strong></h1>
     <h3>Your Record is been Submited</h3>
     <a id="Logout1" class="margin btn btn-danger">Click Here To Logout</a>
+    <h3 style="color:#d9534f">Scroll Down to See Your History</h3>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+
+<div>
+    <h1>User History</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VoteStatus)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.dateTime)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+                <tr>
+                    @if (j.Any(x => x == item.UserId))
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LastName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VoteStatus)-
+                            @Html.DisplayFor(modelItem=>item.CandidateName)
+                        </td>
+                         <td class="dt">
+                            @Html.DisplayFor(modelItem => item.dateTime)
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
