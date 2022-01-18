@@ -21,7 +21,8 @@ namespace Service_Layer.Repositories
                 UserId = u.UserId,
                 FirstName = u.FirstName,
                 LastName = u.LastName,
-                VoteStatus = u.ChoiceCandidateId
+                VoteStatus = u.ChoiceCandidateId,
+                CandidateName=_Context.Candidates.Where(x=>x.CandidateId==u.ChoiceCandidateId).Select(s=>s.FirstName+" "+s.LastName).FirstOrDefault(),
             });
         }
 

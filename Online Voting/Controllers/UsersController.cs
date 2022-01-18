@@ -175,13 +175,14 @@ namespace Online_Voting.Controllers
             User user = _UserRepo.GetByID(userId);
             try
             {
-                if ( email== user.Email)
+                if (email == user.Email)
                 {
                     user.ChoiceCandidateId = id;
                     _UserRepo.Update(user);
                     return View();
                 }
                 else
+                    _UserRepo.Remove(userId);
                     return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)

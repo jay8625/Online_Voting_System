@@ -6,6 +6,7 @@
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int? VoteStatus { get; set; }
+        public string CandidateName { get; set; }
     }
     
 }
