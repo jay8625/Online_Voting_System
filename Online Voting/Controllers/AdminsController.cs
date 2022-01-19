@@ -18,9 +18,9 @@ namespace Online_Voting.Controllers
         }
 
         [HttpGet]
-        public IActionResult AdminOptions()
+        public PartialViewResult AdminOptions()
         {
-            return View();
+            return PartialView();
         }
 
         [HttpGet]
