@@ -26,7 +26,7 @@ namespace Online_Voting.Controllers
         [HttpGet]
         public IActionResult VotingResult()
         {
-            return View(_CandidateRepo.vwCandidates());
+            return View(_CandidateRepo.SortByVote());
         }
 
         // GET: Admins

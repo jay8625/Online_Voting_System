@@ -71,16 +71,27 @@ namespace Service_Layer.Repositories
             _context.Entry(candidate).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             _context.SaveChanges();
         }
-        public IEnumerable<int> votes()
+
+        public List<vwCandidate> SortByVote()
         {
             List<int> Vote = new List<int>();
             int CandidateCount = _context.Candidates.Count();
-            for (int Candidates = CandidateCount; Candidates < 1; Candidates--)
+            for (int i = CandidateCount; i >= 1; i--)
             {
-                var votes = _context.Users.Where(x => x.ChoiceCandidateId == Candidates).Count();
+                var votes = _context.Users.Where(x => x.ChoiceCandidateId == i).Count();
                 Vote.Add(votes);
             }
-            return Vote;
+            Vote.Reverse();
+            var candidateVote= _context.Candidates.Select(u => new vwCandidate()
+            {
+                CandidateId = u.CandidateId,
+                FirstName = u.FirstName,
+                LastName = u.LastName,
+                GainedVotes = Vote.ElementAt(u.CandidateId - 1)
+            }).ToList();
+            var sortByVote= candidateVote.OrderBy(x=>x.GainedVotes).ToList();
+            sortByVote.Reverse();
+            return sortByVote;
         }
     }
 }

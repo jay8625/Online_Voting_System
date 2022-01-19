@@ -1,16 +1,47 @@
 ﻿@model IEnumerable<Service_Layer.vwModel.vwCandidate>
 
-@{
+    @{
     ViewData["Title"] = "VotingResult";
 }
+<style>
+    .firstcellradius {
+        -webkit-border-bottom-left-radius: 20px;
+        -webkit-border-top-left-radius: 20px;
+    }
 
+    .secondcellradius {
+        -webkit-border-bottom-right-radius: 20px;
+        border-top-right-radius: 20px
+    }
+    .looser {
+    background-color: #d9534f;
+    color: white;
+}
+#tie {
+    height: 50px;
+    text-align: center;
+    padding-top: 7px;
+    -webkit-border-bottom-left-radius: 20px;
+    -webkit-border-top-left-radius: 20px;
+    -webkit-border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+.winner {
+    background-color: #5cb85c;
+    color: white;
+}
+
+</style>
 <h1>VotingResult</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
+        <tr>
+            <h3 id="tie" style="text-align:center">Winner Is @Model.ElementAt(0).FirstName @Model.ElementAt(0).LastName  -  @Model.ElementAt(0).GainedVotes Votes</h3>
+        </tr>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.CandidateId)
@@ -28,26 +59,64 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CandidateId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GainedVotes)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.CandidateId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CandidateId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CandidateId">Delete</a>
-            </td>
-        </tr>
-}
+        @{
+            int Count = 0;
+            int m = Model.Count();
+        }
+        @foreach (var item in Model)
+        {
+            @if (Count == 0)
+            {
+                <tr>
+                    <td class="winner firstcellradius">
+                        @Html.DisplayFor(modelItem => item.CandidateId)
+                    </td>
+                    <td class="winner">
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td class="winner">
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td class="winner secondcellradius">
+                        @Html.DisplayFor(modelItem => item.GainedVotes)
+                    </td>
+                </tr>
+            }
+            @if (Count == Model.Count() - 1)
+            {
+                <tr>
+                    <td class="looser firstcellradius">
+                        @Html.DisplayFor(modelItem => item.CandidateId)
+                    </td>
+                    <td class="looser">
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td class="looser">
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td class="looser secondcellradius">
+                        @Html.DisplayFor(modelItem => item.GainedVotes)
+                    </td>
+                </tr>
+            }
+            @if (Count != 0 && Count != Model.Count() - 1)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CandidateId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GainedVotes)
+                    </td>
+                </tr>
+            }
+            Count++;
+        }
     </tbody>
 </table>

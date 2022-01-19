@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Service_Layer.vwModel
+﻿namespace Service_Layer.vwModel
 {
     public class vwCandidate
     {

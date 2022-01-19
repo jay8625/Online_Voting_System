@@ -13,6 +13,6 @@ namespace Service_Layer.Repositories
         bool Any(int Id);
         Candidate GetByID(int Id);
         void Remove(int Id);
-        IEnumerable<int> votes();
+        List<vwCandidate> SortByVote();
     }
 }
