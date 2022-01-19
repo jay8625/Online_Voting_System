@@ -11,7 +11,7 @@ namespace Service_Layer.vwModel
         public string FirstName { get; set; }
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
-        [Display(Name = "Voted To")]
+        [Display(Name = "Candidate ID")]
         public int? VoteStatus { get; set; }
         [Display(Name = "Candidate Name")]
         public string CandidateName { get; set; }

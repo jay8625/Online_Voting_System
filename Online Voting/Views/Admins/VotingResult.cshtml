@@ -40,7 +40,7 @@
 <table class="table">
     <thead>
         <tr>
-            <h3 id="tie" style="text-align:center">Winner Is @Model.ElementAt(0).FirstName @Model.ElementAt(0).LastName  -  @Model.ElementAt(0).GainedVotes Votes</h3>
+            <h3 id="tie" style="text-align:center;width: 59rem;">Winner Is @Model.ElementAt(0).FirstName @Model.ElementAt(0).LastName  -  @Model.ElementAt(0).VotesAchived Votes</h3>
         </tr>
         <tr>
             <th>
@@ -53,7 +53,7 @@
                 @Html.DisplayNameFor(model => model.LastName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.GainedVotes)
+                @Html.DisplayNameFor(model => model.VotesAchived)
             </th>
             <th></th>
         </tr>
@@ -78,7 +78,7 @@
                         @Html.DisplayFor(modelItem => item.LastName)
                     </td>
                     <td class="winner secondcellradius">
-                        @Html.DisplayFor(modelItem => item.GainedVotes)
+                        @Html.DisplayFor(modelItem => item.VotesAchived)
                     </td>
                 </tr>
             }
@@ -95,7 +95,7 @@
                         @Html.DisplayFor(modelItem => item.LastName)
                     </td>
                     <td class="looser secondcellradius">
-                        @Html.DisplayFor(modelItem => item.GainedVotes)
+                        @Html.DisplayFor(modelItem => item.VotesAchived)
                     </td>
                 </tr>
             }
@@ -112,7 +112,7 @@
                         @Html.DisplayFor(modelItem => item.LastName)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.GainedVotes)
+                        @Html.DisplayFor(modelItem => item.VotesAchived)
                     </td>
                 </tr>
             }

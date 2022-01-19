@@ -15,6 +15,7 @@ namespace Service_Layer.Repositories
             _context = context;
         }
 
+        //get candidates as per vwModel
         public IEnumerable<vwCandidate> vwCandidates()
         {
             List<int> Vote = new List<int>();
@@ -30,16 +31,18 @@ namespace Service_Layer.Repositories
                 CandidateId = u.CandidateId,
                 FirstName = u.FirstName,
                 LastName = u.LastName,
-                GainedVotes = Vote.ElementAt(u.CandidateId-1)
+                VotesAchived = Vote.ElementAt(u.CandidateId-1)
             });
         }
 
+        //adds candidate
         public void Add(Candidate candidate)
         {
             _context.Candidates.Add(candidate);
             _context.SaveChanges();
         }
 
+        //condition by Id
         public bool Any(int Id)
         {
             if (_context.Candidates.Any(e => e.CandidateId == Id))
@@ -49,16 +52,19 @@ namespace Service_Layer.Repositories
             return false;
         }
 
+        //get all candidates
         public IEnumerable<Candidate> GetAll()
         {
             return _context.Candidates.ToList();
         }
 
+        //get candidate by Id
         public Candidate GetByID(int Id)
         {
             return _context.Candidates.Where(x => x.CandidateId == Id).FirstOrDefault();
         }
 
+        //Removes Candidate
         public void Remove(int Id)
         {
             Candidate Remove = _context.Candidates.Find(Id);
@@ -66,12 +72,14 @@ namespace Service_Layer.Repositories
             _context.SaveChanges();
         }
 
+        //update info
         public void Update(Candidate candidate)
         {
             _context.Entry(candidate).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             _context.SaveChanges();
         }
 
+        //sort candidate by votes
         public List<vwCandidate> SortByVote()
         {
             List<int> Vote = new List<int>();
@@ -87,9 +95,9 @@ namespace Service_Layer.Repositories
                 CandidateId = u.CandidateId,
                 FirstName = u.FirstName,
                 LastName = u.LastName,
-                GainedVotes = Vote.ElementAt(u.CandidateId - 1)
+                VotesAchived = Vote.ElementAt(u.CandidateId - 1)
             }).ToList();
-            var sortByVote= candidateVote.OrderBy(x=>x.GainedVotes).ToList();
+            var sortByVote= candidateVote.OrderBy(x=>x.VotesAchived).ToList();
             sortByVote.Reverse();
             return sortByVote;
         }

@@ -7,7 +7,7 @@
 <h1>List Of Candidates</h1>
 
 <p>
-    <a asp-action="Create">Create New Political Candidate</a>
+    <a class="bi bi-plus-circle-fill" asp-action="Create"> Create New Political Candidate</a>
 </p>
 <table class="table">
     <thead>
@@ -49,9 +49,9 @@
                 @Html.DisplayFor(modelItem => item.PhoneNumber)
             </td>
             <td>
-                <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.CandidateId">Edit</a> |
-                <a class="btn btn-outline-success" asp-action="Details" asp-route-id="@item.CandidateId">Details</a> |
-                <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.CandidateId">Delete</a>
+                <a style="color:#5cb85c" class="bi bi-pencil-square" asp-action="Edit" asp-route-id="@item.CandidateId"></a> |
+                <a style="color:#0275d8 " class="bi bi-collection-fill" asp-action="Details" asp-route-id="@item.CandidateId"></a> |
+                <a style="color:#d9534f " class="bi bi-trash-fill" asp-action="Delete" asp-route-id="@item.CandidateId"></a>
             </td>
         </tr>
 }

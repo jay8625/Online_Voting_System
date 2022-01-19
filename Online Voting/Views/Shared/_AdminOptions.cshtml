@@ -14,7 +14,7 @@
     }
 </style>
 <h3 style="text-align:center">AdminOptions</h3>
-<ul style="list-style-type:none;">
+<ul style="list-style-type:none;padding-left: 0px;text-align: center;">
     <li>
         <a class="allmargin hover btn bg-info text-white" asp-controller="Users" asp-action="Index">Users Modifications</a>
     </li>
@@ -24,8 +24,8 @@
     <li>
         <a class="allmargin hover btn bg-info text-white" asp-action="Index">Admin Modifications</a>
     </li>
-    <li>
-        <a class="allmargin hover btn bg-info text-white" asp-action="VotingResult">Voting Results</a>
+    <li style="width: -webkit-fill-available">
+        <a class="allmargin hover btn bg-info text-white" asp-controller="Admins" asp-action="VotingResult">Voting Results</a>
     </li>
 </ul>
 

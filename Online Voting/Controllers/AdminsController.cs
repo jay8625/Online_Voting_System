@@ -18,6 +18,7 @@ namespace Online_Voting.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public PartialViewResult AdminOptions()
         {
             return PartialView();

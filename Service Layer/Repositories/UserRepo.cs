@@ -14,6 +14,8 @@ namespace Service_Layer.Repositories
         {
             _Context = Context;
         }
+
+        //get users as per vwModel
         public IEnumerable<vwUser> vwUsers()
         {
             return _Context.Users.Select(u => new vwUser()
@@ -27,6 +29,7 @@ namespace Service_Layer.Repositories
             });
         }
 
+        //condition by Id
         public bool Any(int Id)
         {
             if (_Context.Users.Any(e => e.UserId == Id))
@@ -36,16 +39,19 @@ namespace Service_Layer.Repositories
             return false;
         }
 
+        //gets all Users
         public IEnumerable<User> GetAll()
         {
             return _Context.Users.ToList();
         }
 
+        //gets user by Id
         public User GetByID(int Id)
         {
             return _Context.Users.FirstOrDefault(x => x.UserId == Id);
         }
 
+        //removes User by Id
         public void Remove(int Id)
         {
             User Remove = _Context.Users.Find(Id);
@@ -53,18 +59,21 @@ namespace Service_Layer.Repositories
             _Context.SaveChanges();
         }
 
+        //Updates User info
         public void Update(User user)
         {
             _Context.Entry(user).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             _Context.SaveChanges();
         }
 
+        //adds new user
         public void Add(User user)
         {
             _Context.Users.Add(user);
             _Context.SaveChanges();
         }
 
+        //sorts User by firstname
         public List<vwUser> SortFirstName()
         {
             List<vwUser> Sorted=_Context.Users.Select(s=>new vwUser
@@ -77,6 +86,7 @@ namespace Service_Layer.Repositories
             return Sorted;
         }
 
+        //sorts User by Lastname
         public List<vwUser> SortLastName()
         {
             List<vwUser> Sorted = _Context.Users.Select(s => new vwUser
@@ -89,6 +99,7 @@ namespace Service_Layer.Repositories
             return Sorted;
         }
 
+        //sorts User by vote
         public List<vwUser> SortVote()
         {
             List<vwUser> Sorted = _Context.Users.Select(s => new vwUser
@@ -99,11 +110,6 @@ namespace Service_Layer.Repositories
                 VoteStatus = s.ChoiceCandidateId
             }).OrderBy(x => x.VoteStatus).ToList();
             return Sorted;
-        }
-
-        public void SortLastName(User user)
-        {
-            _Context.Users.OrderByDescending(x => x.LastName);
         }
     }
 }

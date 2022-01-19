@@ -7,7 +7,7 @@ namespace DAL_Data_Access_Layer_.Model
 {
     public class Admin
     {
-
+        //primary key
         [Key]
         public int Id { get; set; }
         [Required]
