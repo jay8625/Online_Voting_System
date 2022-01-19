@@ -13,9 +13,11 @@ using System.Collections.Generic;
 
 namespace Online_Voting.Controllers
 {
+    //authorize validation for users
     [Authorize]
     public class UsersController : Controller
     {
+        //declaring Repositories to perform actions
         private readonly IUser _UserRepo;
         private readonly ICandidate _CandidateRepo;
         private readonly SignInManager<Online_VotingUser> _signinManager;
@@ -34,6 +36,7 @@ namespace Online_Voting.Controllers
             if (search != null)
             {
                 string searchLower = search.ToLower();
+                //Search query
                 data = data.Where(x => x.FirstName.ToLower().Contains(searchLower) || x.LastName.ToLower().Contains(searchLower)).ToList();
                 return View(data);
             }
@@ -167,14 +170,17 @@ namespace Online_Voting.Controllers
             return View(_CandidateRepo.GetAll());
         }
 
+        //gets thanks message and email verification
         [HttpGet]
         [Route("ChoiceCandidate")]
         public IActionResult ChoiceCandidate(int id)
         {
             string email = TempData["email"].ToString();
+            //gets userId
             int userId = Convert.ToInt32(TempData["userId"]);
             User user = _UserRepo.GetByID(userId);
             var vwUsers = _UserRepo.vwUsers();
+            //votes with same Email user Id query
             IEnumerable<int> User = _UserRepo.GetAll().Where(x => x.Email == email).Select(s=>s.UserId);
             ViewBag.UserId = User;
 
@@ -197,6 +203,7 @@ namespace Online_Voting.Controllers
             }
         }
 
+        //sorts by first name
         [HttpGet]
         [Route("SortFirstName")]
         public IActionResult SortFirstName()
@@ -204,6 +211,7 @@ namespace Online_Voting.Controllers
             return View("Index", _UserRepo.SortFirstName());
         }
 
+        //sorts by last name
         [HttpGet]
         [Route("SortLastName")]
         public IActionResult SortLastName()
@@ -211,6 +219,7 @@ namespace Online_Voting.Controllers
             return View("Index", _UserRepo.SortLastName());
         }
 
+        //sorts by votes to a candidate
         [HttpGet]
         [Route("SortbyVote")]
         public IActionResult SortbyVote()
@@ -218,6 +227,7 @@ namespace Online_Voting.Controllers
             return View("Index", _UserRepo.SortVote());
         }
 
+        //any user condition
         private bool UserExists(int id)
         {
             return _UserRepo.Any(id);

@@ -8,6 +8,7 @@ namespace Online_Voting.Controllers
 {
     public class CandidatesController : Controller
     {
+        //declaring Repositories to perform actions
         private readonly ICandidate _CandidateRepo;
 
         public CandidatesController(ICandidate candidateRepo)
@@ -140,6 +141,7 @@ namespace Online_Voting.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        //any condition candidate
         private bool CandidateExists(int id)
         {
             return _CandidateRepo.Any(id);

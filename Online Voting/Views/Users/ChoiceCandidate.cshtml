@@ -5,78 +5,78 @@
     @{
     ViewData["Title"] = "Index";
     IEnumerable<int> j = ViewBag.UserId;
-     }
-
-        <style>
-            #margin {
-                margin-top: 90px;
-            }
-
-            .margin {
-                margin-bottom: 120px;
-            }
-
-            #Logout1 {
-                color: white;
-            }
-            .candidatehead{
-                padding-bottom: 0px;
-    margin-bottom: 0px;
-    border-bottom-width: 0px;
 }
-            }
 
-            .dt {
-                width: 150px;
-            }
-        </style>
-        <div id="margin" class="text-center">
-            <h1 class="display-4"><strong>Thanks For Voting</strong></h1>
-            <h3>Your Record is been Submited</h3>
-            <a id="Logout1" class="margin btn btn-danger">Click Here To Logout</a>
+<style>
+    #margin {
+        margin-top: 90px;
+    }
+
+    .margin {
+        margin-bottom: 120px;
+    }
+
+    #Logout1 {
+        color: white;
+    }
+
+    .candidatehead {
+        padding-bottom: 0px;
+        margin-bottom: 0px;
+        border-bottom-width: 0px;
+    }
+
+    .dt {
+        width: 150px;
+    }
+</style>
+<div id="margin" class="text-center">
+    <h1 class="display-4"><strong>Thanks For Voting</strong></h1>
+    <h3>Your Record is been Submited</h3>
+    <a id="Logout1" class="margin btn btn-danger">Click Here To Logout</a>
 
 
 
-            <div id="history">
-                <h1 style="margin-bottom:50px;text-align:left">Voting History</h1>
-                <h3 class="historybtn" style="text-align:left; color:#d9534f; cursor:pointer;">Hide History</h3>
+    <div id="history">
+        <h1 style="margin-bottom:50px;text-align:left">Voting History</h1>
+        <h3 class="historybtn" style="text-align:left; color:#d9534f; cursor:pointer;">Hide History</h3>
 
-                <table style="width:500px" class="table">
-                    <thead>
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.VoteStatus)
-                            </th>
-                             <th>
-                                 <p class="candidatehead">Candidate Name</p>
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.dateTime)
-                            </th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
+        <table style="width:500px" class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VoteStatus)
+                    </th>
+                    <th>
+                        <p class="candidatehead">Candidate Name</p>
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.dateTime)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        @if (j.Any(x => x == item.UserId))
                         {
-                        <tr>
-                            @if (j.Any(x => x == item.UserId))
-                            {
                             <td>
                                 @Html.DisplayFor(modelItem => item.VoteStatus)
                             </td>
-                             <td>
+                            <td>
                                 @Html.DisplayFor(modelItem => item.CandidateName)
                             </td>
                             <td class="dt">
                                 @Html.DisplayFor(modelItem => item.dateTime)
                             </td>
-                            }
-                        </tr>
                         }
-                    </tbody>
-                </table>
-            </div>
-            <h3 class="historybtn" style="color:#d9534f; cursor:pointer;">View Voting History</h3>
-            <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-        </div>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <h3 class="historybtn" style="color:#d9534f; cursor:pointer;">View Voting History</h3>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>

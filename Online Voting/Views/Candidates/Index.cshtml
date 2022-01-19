@@ -31,29 +31,30 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Age)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Gender)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
-                <a style="color:#5cb85c" class="bi bi-pencil-square" asp-action="Edit" asp-route-id="@item.CandidateId"></a> |
-                <a style="color:#0275d8 " class="bi bi-collection-fill" asp-action="Details" asp-route-id="@item.CandidateId"></a> |
-                <a style="color:#d9534f " class="bi bi-trash-fill" asp-action="Delete" asp-route-id="@item.CandidateId"></a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+                    <tr>
+                        <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                        </td>
+                        <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                        </td>
+                        <td>
+                    @Html.DisplayFor(modelItem => item.Age)
+                        </td>
+                        <td>
+                    @Html.DisplayFor(modelItem => item.Gender)
+                        </td>
+                        <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                        </td>
+                        <td>
+                            <a style="color:#5cb85c" class="bi bi-pencil-square" asp-action="Edit" asp-route-id="@item.CandidateId"></a> |
+                            <a style="color:#0275d8 " class="bi bi-collection-fill" asp-action="Details" asp-route-id="@item.CandidateId"></a> |
+                            <a style="color:#d9534f " class="bi bi-trash-fill" asp-action="Delete" asp-route-id="@item.CandidateId"></a>
+                        </td>
+                    </tr>
+        }
     </tbody>
 </table>

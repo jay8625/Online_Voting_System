@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Online_Voting.Controllers
 {
+    //Authorize validation 
     //[Authorize(Roles = "Admin")]
     public class AdminsController : Controller
     {
+        //declaring Repositories to perform actions
         private readonly IAdmin _AdminRepo;
         private readonly ICandidate _CandidateRepo;
         public AdminsController(IAdmin repo, ICandidate candidateRepo)
@@ -17,6 +19,7 @@ namespace Online_Voting.Controllers
             _CandidateRepo = candidateRepo;
         }
 
+        //partial view of AdminOptions
         [HttpGet]
         [AllowAnonymous]
         public PartialViewResult AdminOptions()
@@ -24,6 +27,7 @@ namespace Online_Voting.Controllers
             return PartialView();
         }
 
+        //get voting results
         [HttpGet]
         public IActionResult VotingResult()
         {
@@ -156,6 +160,7 @@ namespace Online_Voting.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        //any condition of admin
         private bool AdminExists(int id)
         {
             return _AdminRepo.Any(id);
