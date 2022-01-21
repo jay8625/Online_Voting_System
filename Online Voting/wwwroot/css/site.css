@@ -15,6 +15,11 @@ a.navbar-brand {
     background-image: url('http://localhost:55694/bg.jpg');
 }
 
+.wdbtn {
+    width: 163px;
+    margin: 10px;
+}
+
 .allmargin {
     margin: 20px;
 }
