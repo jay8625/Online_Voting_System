@@ -1,16 +1,15 @@
 ﻿@model DAL_Data_Access_Layer_.Model.Candidate
 
 @{
-ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1>Edit Candidate</h1>
 
-<h4>Candidate</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+<form asp-action="Edit">
+    <div class="row">
+        <div class="col-md-4">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="CandidateId" />
             <div class="form-group">
@@ -28,6 +27,8 @@ ViewData["Title"] = "Edit";
                 <input asp-for="Age" class="form-control" />
                 <span asp-validation-for="Age" class="text-danger"></span>
             </div>
+        </div>
+        <div class="col-sm-4 col-sm-offset-4">
             <div class="form-group">
                 <div class="form-group">
                     <ul>
@@ -48,16 +49,17 @@ ViewData["Title"] = "Edit";
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <a style="position: relative;top: 9px;" class="bi bi-arrow-left-square-fill fa-2x" asp-action="Index"></a>
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
-        </form>
+        </div>
     </div>
-</div>
+</form>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 
 @section Scripts {
-@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
 }

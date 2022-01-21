@@ -26,5 +26,7 @@ namespace Service_Layer.Repositories
         List<vwUser> SortLastName();
         //sorts User by vote
         List<vwUser> SortVote();
+        //removes list of users
+        void CascadeRemove(int Id);
     }
 }

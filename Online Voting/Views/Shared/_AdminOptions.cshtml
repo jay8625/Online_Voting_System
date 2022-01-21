@@ -1,20 +1,7 @@
 ﻿@{
     ViewData["Title"] = "AdminOptions";
 }
-<style>
-    .allmargin {
-        margin: 20px;
-    }
 
-    .hover:hover {
-        transform: scale(1.1);
-        transition: 1s;
-    }
-
-    .hover {
-        transition: 1s;
-    }
-</style>
 <h3 style="text-align:center">AdminOptions</h3>
 <ul style="list-style-type:none;padding-left: 0px;text-align: center;">
     <li>
@@ -24,10 +11,7 @@
         <a class="allmargin hover btn bg-info text-white" asp-controller="Candidates" asp-action="Index">Candidate Modifications</a>
     </li>
     <li>
-        <a class="allmargin hover btn bg-info text-white" asp-action="Index">Admin Modifications</a>
-    </li>
-    <li>
-        <a class="allmargin hover btn bg-info text-white" asp-controller="Admins" asp-action="VotingResult">Voting Results</a>
+        <a class="allmargin hover btn bg-info text-white" style="width: 163px" asp-controller="Admins" asp-action="VotingResult">Voting Results</a>
     </li>
 </ul>
 

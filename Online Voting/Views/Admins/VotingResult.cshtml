@@ -3,49 +3,16 @@
     @{
     ViewData["Title"] = "VotingResult";
 }
-<style>
-    .firstcellradius {
-        -webkit-border-bottom-left-radius: 20px;
-        -webkit-border-top-left-radius: 20px;
-    }
 
-    .secondcellradius {
-        -webkit-border-bottom-right-radius: 20px;
-        border-top-right-radius: 20px
-    }
-
-    .looser {
-        background-color: #d9534f;
-        color: white;
-    }
-
-    #tie {
-        height: 50px;
-        text-align: center;
-        padding-top: 7px;
-        -webkit-border-bottom-left-radius: 20px;
-        -webkit-border-top-left-radius: 20px;
-        -webkit-border-bottom-right-radius: 20px;
-        border-top-right-radius: 20px;
-        background-color: #5cb85c;
-        color: white;
-    }
-
-    .winner {
-        background-color: #5cb85c;
-        color: white;
-    }
-
-</style>
 <h1>VotingResult</h1>
 
 <table class="table">
     <thead>
         <tr>
-            <h3 id="tie" style="text-align:center;width: 59rem;">Winner Is @Model.ElementAt(0).FirstName @Model.ElementAt(0).LastName  -  @Model.ElementAt(0).VotesAchived Votes</h3>
+            <h3 id="tie">Winner Is @Model.ElementAt(0).FirstName @Model.ElementAt(0).LastName  -  @Model.ElementAt(0).VotesAchived Votes</h3>
         </tr>
-        <tr>
-            <th>
+        <tr class="text-white bg-dark">
+            <th class="firstcellradius">
                 @Html.DisplayNameFor(model => model.CandidateId)
             </th>
             <th>
@@ -54,10 +21,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.LastName)
             </th>
-            <th>
+            <th class="secondcellradius">
                 @Html.DisplayNameFor(model => model.VotesAchived)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>

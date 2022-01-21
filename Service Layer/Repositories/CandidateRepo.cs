@@ -31,7 +31,7 @@ namespace Service_Layer.Repositories
                 CandidateId = u.CandidateId,
                 FirstName = u.FirstName,
                 LastName = u.LastName,
-                VotesAchived = Vote.ElementAt(u.CandidateId-1)
+                VotesAchived = Vote.ElementAt(u.CandidateId - 1)
             });
         }
 
@@ -82,24 +82,14 @@ namespace Service_Layer.Repositories
         //sort candidate by votes
         public List<vwCandidate> SortByVote()
         {
-            List<int> Vote = new List<int>();
-            int CandidateCount = _context.Candidates.Count();
-            for (int i = CandidateCount; i >= 1; i--)
-            {
-                var votes = _context.Users.Where(x => x.ChoiceCandidateId == i).Count();
-                Vote.Add(votes);
-            }
-            Vote.Reverse();
-            var candidateVote= _context.Candidates.Select(u => new vwCandidate()
+            var candidateVote = _context.Candidates.Select(u => new vwCandidate()
             {
                 CandidateId = u.CandidateId,
                 FirstName = u.FirstName,
                 LastName = u.LastName,
-                VotesAchived = Vote.ElementAt(u.CandidateId - 1)
-            }).ToList();
-            var sortByVote= candidateVote.OrderBy(x=>x.VotesAchived).ToList();
-            sortByVote.Reverse();
-            return sortByVote;
+                VotesAchived = _context.Users.Where(x => x.ChoiceCandidateId == u.CandidateId).Count()
+        });
+            return candidateVote.OrderByDescending(x => x.VotesAchived).ToList();
         }
     }
 }
